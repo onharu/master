@@ -1,0 +1,190 @@
+\documentclass[11pt]{jarticle}
+
+%パッケージ
+\usepackage{amssymb,amsmath}
+\usepackage{listings}
+\usepackage[dvipdfmx]{graphicx}
+%レイアウト
+\setlength{\oddsidemargin}{0mm}
+\setlength{\textwidth}{160mm}
+\setlength{\topmargin}{-9mm}
+\setlength{\headheight}{0mm}
+\setlength{\textheight}{241mm}
+\lstset{
+  basicstyle={\ttfamily},
+  identifierstyle={\small},
+  commentstyle={\smallitshape},
+  keywordstyle={\small\bfseries},
+  ndkeywordstyle={\small},
+  stringstyle={\small\ttfamily},
+  frame={tb},
+  breaklines=true,
+  columns=[l]{fullflexible},
+  numbers=left,
+  xrightmargin=0zw,
+  xleftmargin=0zw,
+  numberstyle={\scriptsize},
+  stepnumber=1,
+  numbersep=1zw,
+  lineskip=-0.8ex
+}
+%\lstset{
+%  language=Lisp,
+%  frame=tblr,
+%  commentstyle=\ttfamily,
+%  morekeywords={
+%    if, define
+%  }
+%}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Header
+\begin{flushleft}
+  中間発表\hspace{\fill}
+  恩田晴登 (2022年12月6日)
+\end{flushleft}
+\begin{center}
+{\Large\bf Pythonの静的型検査器によるコレオグラフィックプログラミング言語の実装}
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{初めに}
+コレオグラフィは，いくつかのロールが互いに連携して何かを行う方法を定義するマルチパーティプロトコルである．
+本研究の先行研究であるChoral\cite{Choral}は，コレオグラフィのプログラミング用に静的に型付けされた，
+高レベルの抽象化を備えたオブジェクト指向言語であり，Javaを直接拡張したものである．Choralを使用して，
+分散認証プロトコルや暗号化プロトコルなどをプログラミングすることができる．
+さらに，Choralコンパイラがコレオグラフィを各ロールのライブラリに自動的に変換（エンドポイント射影）するため，開発者は各ロールのプログラム
+を記述する必要はなく，変換されたライブラリは通信の安全性が保証されている．
+本研究ではJavaを拡張したChoralを参考に，pythonの静的型検査器であるMypy\cite{mypy}を使用して，Python
+をベースとしたコレオグラフィックプログラミング言語の開発を行う．
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Choral}
+コレオグラフィックプログラミング言語であるChoralについて，簡単な例によりChoralプログラムから各ロール
+のJavaライブラリが生成されることを説明する\cite{choreography}．
+Choralでは，コレオグラフィはオブジェクトとして扱う．Choralのオブジェクトは$T@(R1,R2, \dots ,Rn)$という形式の型を持つ．
+ここで$T$はオブジェクトのインターフェースであり，$R1,R2, \dots ,Rn$はオブジェクトを共同で実装するロールである．
+オブジェクトの状態と振舞いは，その型のロールに分散させることができる．
+\begin{lstlisting}[caption = HelloRoles(Choral program)]
+class HelloRoles@( A, B ) {
+  public void sayHello() {
+    String@A a = "Hello from A"@A;
+    String@B b = "Hello from B"@B;
+    System@A.out.println( a );
+    System@B.out.println( b );
+  }
+}
+\end{lstlisting}
+上のコードでは，A,Bの2つのロールをパラメータとするクラスを定義している．メソッド$sayHello()$では，
+ロールAにおける文字列$String@A$型の変数aを定義し，これにAが持つ$"Hello~from~A"$という値を代入している
+（Bも同様である）．最後の2行はSystemオブジェクトを使って変数a,bを表示している．
+重要なのは$@R$という型を持つという点である．Choralではロールはデータ型の一部であり，例えば
+\begin{lstlisting}
+String@A a = "Hello from B"@B
+\end{lstlisting}
+という代入文は左辺と右辺のロールが異なるため型エラーとなる．
+
+\newpage
+\begin{lstlisting}[caption = HelloRoles(generated Java program)]
+class HelloRoles_A {
+  public static void sayHello() {
+    String a = "Hello from A";
+    System.out.println( a );
+  }
+}
+\end{lstlisting} 
+ChoralでHelloRoleクラスが与えられると，コンパイラはChoralのクラスに従って，
+各ロールに対する振舞いを持つJavaクラスを生成する．上のコードはChoralコンパイラ
+によって自動生成されたロールAのJavaクラスHelloRoles$\_$Aである．
+%これらはChoralのエンドポイント射影の規則によって生成されている．
+このようにChoralは，マルチパーティプロトコルに従った各ロールのプログラムが安全性が保証された状態で
+自動的に生成されるため，プログラマーの負担を遥かに減らすことができる．
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Mypy}
+Choralのエンドポイント射影はプログラムの型情報を使って定義している．しかし，Pythonは動的言語
+であり，型検査の機能はないため，エンドポイント射影をする際にプログラムから型情報を得る方法がない．
+そこで，Pythonの静的型検査器であるMypyを使い，問題を解消する．
+Mypyの内部機能により構文解析をして，Visitorパターンを利用して構文木をトラバースすることでコレオグラフィック
+プログラムから型エラーがない様に，各ロールのPythonライブラリへとエンドポイント射影ができると考えている．
+
+Visitorパターンとは，オブジェクト指向プログラミングにおいて，アルゴリズムをデータ構造から分離
+するためのデザインパターンの一種である．Visitorパターンでは，データを保持するクラスとアルゴリズムを
+実装するクラス（Visitorクラス）に分ける．また，それぞれaccept()メソッドとvisit()メソッドを持つ．
+そして，定義したメソッド内で互いのメソッドを呼び出すようにする．
+本研究では，構文木のトラバース毎にVisitorクラスを作り，コンストラクタ毎にvisit()メソッドを加えていく．
+データ構造は構文木であり，それぞれのコンストラクタにaccept()メソッドが用意されている．accept()メソッド
+はVisitorクラスから対応するメソッドを呼ぶことで，パターンマッチさせる．
+
+%PythonはJavaとは違い動的言語であるため，通常はコード実行時にエラーが
+%表示される．しかし，Mypyを利用して型注釈を付けたプログラムは，実行しなくてもコンパイル時にバグを検出できる．
+%さらに，Mypyで注釈をつけたプログラムはPythonの実行方法を変えずに通常通り実行できる．
+%まず，プログラマーが記述するMypyを使用したPythonコード例を簡単に紹介する．
+%\begin{lstlisting}
+%# variable
+%a:int = 1
+%a:int = "abc" # error: expression has type "str", variable has type "int"
+%
+%# function
+%def greeting(name:str) -> str:
+%  return "Hello" + name
+%
+%greeting("sato") # Hello sato
+%greeting(123) # error: "greeting" has incompatible type "int"; expected "str"
+%\end{lstlisting}
+%Pythonには動的型付けがあるため，実行時に型を決定するが，Mypyによって，変数にアノテーションをつけることでコンパイル時に型検査を行う．
+%関数は引数と戻り値にアノテーションをつける必要がある．戻り値が明示的でない場合は型をNoneとする．
+
+%Visitorパターンとは，アルゴリズムをオブジェクトの構造から分離するためのデザインパターンの一種である．
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{現在の進捗}\mbox{}\\
+Choralの使用例が記載されている論文\cite{choreography}を読み，Choralに対しての理解を深めた．
+また，MypyをPythonプログラムに反映し，型検査を行うことでMypyに対する理解を深め，Visitorパターンについても学んだ．
+PythonではChoralにある"Hello"@Aのような，リテラルにロールの注釈をつける方法が存在しないため，
+代わりにat("Hello",~A())のようにat関数を定義して同じように記述できるようにした（この記法は煩雑なため，今後修正予定）．
+現在はChoralのエンドポイント射影の中で比較的簡単な代入文を，Mypyを利用したPythonベースのコレオグラフィック言語
+で記述している途中である．
+
+%\cite{choreography}をもとに，ロールを含む代入文のエンドポイント射影を適切に行えるように
+%どうすればいいかを考えている．
+%Choralで記述していた$@R$は，Pythonにはないため，例えばHelloRolesの
+%\begin{lstlisting}
+%String@A a = "Hello from A"@A;
+%\end{lstlisting}  
+%は
+%\begin{lstlisting}
+%class rstr(str,Generic[T]):
+%  pass
+%
+%def at(x:str,y:T) -> rstr[T]:
+%  return cast(rstr[T],x)
+%
+%a:rstr[A] = at("Hello from A",A()) 
+%\end{lstlisting} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{今後の課題}\mbox{}\\
+・Choralについての論文をさらに読み，構文やエンドポイント射影の定義に対する理解を深める．
+\\
+・Visitorパターンを活用し，文や式，クラスなどに対して適切なロールが反映されて
+エンドポイント射影がされるように考え，プログラムを記述していく．
+\\
+・Javaには存在してPyhonには存在しないインターフェースを，代わりにどのように記述するかを考え，実行する．
+\\
+・開発した言語を使って実用例を複数示す．
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{thebibliography}{99}
+  \bibitem{Choral} Choral.    https://www.choral-lang.org/index.html
+  \bibitem{mypy} mypy.   https://mypy.readthedocs.io/en/stable
+  \bibitem{choreography}Object-Oriented Choreographic Programming
+  
+  SAVERIO GIALLORENZO FABRIZIO MONTESI MARCO PERESSOTTI
+
+  https://arxiv.org/abs/2005.09520
+\end{thebibliography}
+\end{document}
+

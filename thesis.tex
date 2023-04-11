@@ -1,0 +1,122 @@
+\documentclass[11pt]{jarticle}
+
+\usepackage{amsmath} % already loaded in the beginning of the main file
+\usepackage{nccmath} % fleqnで左詰め
+\usepackage{amsfonts}
+\let\openbox\undefined
+\usepackage{amsthm} %% NOTE: incompatible with IPSJ class
+\let\Bbbk\relax % fix \Bbbk problem in ACM class
+\usepackage{amssymb}
+\usepackage{mathtools} % \Coloneqq
+\usepackage{stmaryrd} % \llparenthesis & rrparenthesis
+\usepackage{ebproof}
+\usepackage{nicefrac}
+\usepackage{float} % \begin{figure}[H]
+% \usepackage{makecell}
+% \usepackage{graphicx,graphics}
+% \graphicspath{{./figures/}}
+
+%% Some recommended packages from ACM
+% \usepackage{booktabs}   %% For formal tables:
+%                         %% http://ctan.org/pkg/booktabs
+% \usepackage{subcaption} %% For complex figures with subfigures/subcaptions
+%                         %% http://ctan.org/pkg/subcaption​
+% \usepackage{relsize} % \mathlarger
+
+% \usepackage{multirow}
+
+% \usepackage{anyfontsize} % fix for math font size warnings
+
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows.meta,positioning}
+\usepackage[framemethod=TikZ]{mdframed}
+
+% \usepackage[caption=false]{subfig}
+
+%% latex programming facilities
+\usepackage{etoolbox}
+\usepackage{xifthen}
+\usepackage{xspace}
+
+% \usepackage{mathptmx} % fancier italic fonts with Times New Roman
+
+%% make Times New Roman as the default font
+%% overwrites cmodern with the Times variant
+% \usepackage{newtxtext} % bold role fonts
+% \usepackage{newtxmath}
+% \DeclareMathAlphabet{\mathbb}{U}{msb}{m}{n}
+\usepackage{mathbbol}
+\DeclareSymbolFontAlphabet{\amsmathbb}{AMSb}%
+
+% \usepackage{mathbbol} % for open (white) ';'
+% \usepackage{textgreek} % \textepsilon
+% \usepackage[strings]{underscore}
+
+% Can't use hyperref in ipsj?
+
+% % Enable nice comments
+% % XXX LOAD THIS AS THE LAST PACKAGE (hyperref restriction)
+% \usepackage{pdfcomment}
+% \usepackage{hypcap}  % \capstart % needs hyperref package
+
+% % Enable that parameters of \cref{}, \ref{}, \cite{}, ... are linked so that a reader can click on the number an jump to the target in the document
+% %% \usepackage{hyperref} % loaded by pdfcomment package above
+% \hypersetup{
+%   hidelinks,
+%   pdftex,
+%   pdfencoding=auto,
+%   unicode,
+%   colorlinks=true,
+%   allcolors=cyan,
+%   pdfstartview=Fit,
+%   breaklinks=true}
+
+\usepackage{url}
+
+\begin{document}
+Syntax
+\begin{alignat*}{3} %alignat{(行ごとの＆の個数+1)/2}奇数番目の＆で揃え、偶数番目の＆はスペース
+  &\text{Literals} &&lit &&\Coloneqq None ~\mid~ True ~\mid~ False ~\mid~  \dots ~\mid~ 1 ~\mid~ \dots\\
+  &\text{Expression}~~~ &&Exp &&\Coloneqq lit@(\overline{A}) ~\mid~ Exp.id ~\mid~ Exp \cdot BinOp \cdot Exp \\
+  &&&&&~\mid~ id_{Fun}.(\overline{Exp}) ~\mid~ Exp.id_{Fun}(\overline{Exp}) ~\mid~ id_{Cls}@(\overline{A}).(\overline{Exp})\\
+  &&&id_{Fun} &&\Coloneqq f ~\mid~ g ~\mid~ \dots\\
+  &&&id_{Cls} &&\Coloneqq C ~\mid~ D ~\mid~ \dots\\
+  &\text{Assign Op.} &&AsgOp~~~ &&\in \{=, +=, -=, *=, /=,\%=, //=,\}\\
+  &\text{Binary Op.} &&BinOp &&\in \{||, \&\&, |, \&, ==, !=, <, >, <=, >=, +, -, *, /, \%, **\}
+\end{alignat*}
+
+Projection To Python
+\begin{alignat*}{2}
+  &(Exp)~~~ &&\color{cyan}\llparenthesis \color{black}lit@(\overline{\color{cyan}B}\color{black}) \color{cyan}\rrparenthesis^A \color{black}=
+  \begin{cases}
+    lit & \text{if}~~ \color{cyan}A \color{black}\in \overline{\color{cyan}B}\\
+    \texttt{Unit.id} &\text{otherwise}
+  \end{cases}\\
+  &&&\color{cyan}\llparenthesis \color{black}Exp.id \color{cyan}\rrparenthesis^A \color{black}= \color{cyan}\llparenthesis \color{black}Exp \color{cyan}\rrparenthesis^A \color{black}.id\\
+  &&&\color{cyan}\llparenthesis \color{black}id_{Fun}(\overline{Exp}) \color{cyan}\rrparenthesis^A \color{black}=
+  \begin{cases}
+    id_{Fun}(\overline{\color{cyan}\llparenthesis \color{black}Exp \color{cyan}\rrparenthesis^A}) &\color{black}\text{if}~~ \color{cyan}A \color{black} \in \text{rolesOf} (id_{Fun}(\overline{Exp}))\\
+    \texttt{Unit.id}_\texttt{Fun}(\overline{\color{cyan}\llparenthesis \color{black}Exp \color{cyan}\rrparenthesis^A}) &\color{black} \text{otherwise}
+  \end{cases}\\
+  &&&\color{cyan}\llparenthesis \color{black}Exp.id_{Fun}(\overline{Exp}) \color{cyan}\rrparenthesis^A \color{black}=
+  \begin{cases}
+    \color{cyan}\llparenthesis \color{black}Exp \color{cyan}\rrparenthesis^A \color{black}.id_{Fun}(\overline{\color{cyan}\llparenthesis \color{black}Exp \color{cyan}\rrparenthesis^A}) &\text{if}~~ \color{cyan}A \color{black} \in \text{rolesOf}(Exp)\\
+    \texttt{Unit.id}_\texttt{Fun}(\overline{\color{cyan}\llparenthesis \color{black}Exp \color{cyan}\rrparenthesis^A}) &\color{black} \text{othewise}
+  \end{cases}\\
+  &&&\color{cyan}\llparenthesis \color{black}id_{Cls}@(\overline{\color{cyan}B}\color{black})(\overline{Exp}) \color{cyan}\rrparenthesis^A \color{black}=
+  \begin{cases}
+    \color{cyan}\llparenthesis \color{black}id_{Cls}@(\overline{\color{cyan}B}) \color{cyan}\rrparenthesis^A \color{black}(\overline{\color{cyan}\llparenthesis \color{black}Exp \color{cyan}\rrparenthesis^A}\color{black}) & \color{cyan}A \color{black} \in \overline{\color{cyan}B}\\
+    \texttt{Unit.id}_\texttt{Cls}(\overline{\color{cyan}\llparenthesis \color{black}Exp \color{cyan}\rrparenthesis^A}) &\text{otherwise}
+  \end{cases}\\
+  &&&\color{cyan}\llparenthesis \color{black}Exp~BinOp~Exp \color{cyan}\rrparenthesis^A \color{black}=
+  \begin{cases}
+    \color{cyan}\llparenthesis \color{black}Exp \color{cyan}\rrparenthesis^A \color{black} ~BinOp~ \color{cyan}\llparenthesis \color{black}Exp \color{cyan}\rrparenthesis^A & \color{black} \text{if}~~\text{roleOf}(Exp) = \{\color{cyan}A\color{black}\}\\
+    \texttt{Unit.id}(\color{cyan}\llparenthesis \color{black}Exp \color{cyan}\rrparenthesis^A \color{black}, \color{cyan}\llparenthesis \color{black}Exp \color{cyan}\rrparenthesis^A \color{black}) & \color{black} \text{if}~~\text{roleOf}(Exp) = \{\color{cyan}A'\color{black}\}
+  \end{cases}\\
+  &&&\text{rolesOf}(lit@(\overline{\color{cyan}B})) = {\overline{\color{cyan}B}}\\
+  &&&\text{rolesOf}(Exp.id) = \overline{\color{cyan}B}~~~\text{if}~~\exists T.\text{typeOf}(Exp.id) = T@(\overline{\color{cyan}B})\\
+  &&&\text{typeOf}:Exp \rightarrow Type\\
+  &&&\text{rolesOf}(id_{Fun}.(\overline{Exp})) = \overline{\color{cyan}B}~~~\text{if}~~\exists T.\text{typeOf}(id_{Fun}.(\overline{Exp})) = T@(\overline{\color{cyan}B})\\
+\end{alignat*}
+\end{document}
