@@ -1,10 +1,10 @@
 # Fdb version 3
-["dvipdf"] 1681179868 "out/thesis.dvi" "out/thesis.pdf" "out/thesis" 1681179869
-  "out/thesis.dvi" 1681179868 18136 a1d7049eca92f9229d2399f94037d8ca "latex"
+["dvipdf"] 1681342796 "out/thesis.dvi" "out/thesis.pdf" "out/thesis" 1681342797
+  "out/thesis.dvi" 1681342796 18864 5a0f8335675de135e6d64acabcc9d779 "latex"
   (generated)
   "out/thesis.pdf"
-["latex"] 1681179867 "/Users/onda/master/thesis.tex" "out/thesis.dvi" "thesis" 1681179869
-  "/Users/onda/master/thesis.tex" 1681179867 6388 c902dd888d8494e870a70278f5d0b425 ""
+["latex"] 1681342795 "/Users/onda/master/thesis.tex" "out/thesis.dvi" "thesis" 1681342797
+  "/Users/onda/master/thesis.tex" 1681342795 6808 28dba9c5c5ce226294dc53953f0bfd8d ""
   "/usr/local/texlive/2021/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/ptex-fonts/standard/min10.tfm" 1463434352 1196 1be730212205a270378fba11a44765dc ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/ptex-fonts/standard/min6.tfm" 1463434352 1196 ede67ffb8cb4a6a8b9436c82b428664c ""
@@ -174,9 +174,9 @@
   "/usr/local/texlive/2021/texmf-dist/web2c/texmf.cnf" 1621028613 40042 fe981136cbb5f3715ab1b0e46e3d3892 ""
   "/usr/local/texlive/2021/texmf-var/web2c/eptex/platex.fmt" 1626447048 2756591 b5f98b6f6ecec28b627412e4fa021240 ""
   "/usr/local/texlive/2021/texmf.cnf" 1616695596 577 4c1911a7228e554c6032256d3cf5567d ""
-  "out/thesis.aux" 1681179868 67 d1f1d04f1f825549314e4f02ae5806bb "latex"
-  "thesis.tex" 1681179867 6388 c902dd888d8494e870a70278f5d0b425 ""
+  "out/thesis.aux" 1681342796 67 d1f1d04f1f825549314e4f02ae5806bb "latex"
+  "thesis.tex" 1681342795 6808 28dba9c5c5ce226294dc53953f0bfd8d ""
   (generated)
-  "out/thesis.log"
-  "out/thesis.dvi"
   "out/thesis.aux"
+  "out/thesis.dvi"
+  "out/thesis.log"

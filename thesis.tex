@@ -78,12 +78,12 @@
 Syntax
 \begin{alignat*}{3} %alignat{(行ごとの＆の個数+1)/2}奇数番目の＆で揃え、偶数番目の＆はスペース
   &\text{Literals} &&lit &&\Coloneqq None ~\mid~ True ~\mid~ False ~\mid~  \dots ~\mid~ 1 ~\mid~ \dots\\
-  &\text{Expression}~~~ &&Exp &&\Coloneqq lit@(\overline{A}) ~\mid~ Exp.id ~\mid~ Exp \cdot BinOp \cdot Exp \\
-  &&&&&~\mid~ id_{Fun}.(\overline{Exp}) ~\mid~ Exp.id_{Fun}(\overline{Exp}) ~\mid~ id_{Cls}@(\overline{A}).(\overline{Exp})\\
+  &\text{Expression}~~~ &&Exp &&\Coloneqq lit@(\overline{A}) ~\mid~ Exp.id ~\mid~ Exp_1 ~ BinOp ~ Exp_2 \\
+  &&&&&~\mid~ id_{Fun}(\overline{Exp}) ~\mid~ Exp.id_{Fun}(\overline{Exp}) ~\mid~ id_{Cls}@(\overline{A}).(\overline{Exp})\\
   &&&id_{Fun} &&\Coloneqq f ~\mid~ g ~\mid~ \dots\\
   &&&id_{Cls} &&\Coloneqq C ~\mid~ D ~\mid~ \dots\\
-  &\text{Assign Op.} &&AsgOp~~~ &&\in \{=, +=, -=, *=, /=,\%=, //=,\}\\
-  &\text{Binary Op.} &&BinOp &&\in \{||, \&\&, |, \&, ==, !=, <, >, <=, >=, +, -, *, /, \%, **\}
+  &\text{Assign Op.} &&AsgOp~~~ &&\in \{\texttt{=, +=, -=, *=, /=, \%=, //=}\}\\
+  &\text{Binary Op.} &&BinOp &&\in \{\texttt{||, \&\&, |, \&, ==, !=, <, >, <=, >=, +, -, *, /, \%, **}\}
 \end{alignat*}
 
 Projection To Python
@@ -93,7 +93,11 @@ Projection To Python
     lit & \text{if}~~ \color{cyan}A \color{black}\in \overline{\color{cyan}B}\\
     \texttt{Unit.id} &\text{otherwise}
   \end{cases}\\
-  &&&\color{cyan}\llparenthesis \color{black}Exp.id \color{cyan}\rrparenthesis^A \color{black}= \color{cyan}\llparenthesis \color{black}Exp \color{cyan}\rrparenthesis^A \color{black}.id\\
+  &&&\color{cyan}\llparenthesis \color{black}Exp.id \color{cyan}\rrparenthesis^A \color{black}= 
+  \begin{cases}
+    \color{cyan}\llparenthesis \color{black}Exp \color{cyan}\rrparenthesis^A \color{black}.id &\text{if}~~\color{cyan}A \color{black} \in \text{rolesOf} (Exp.id)\\
+    \text{absent} &\text{otherwise}
+  \end{cases}\\
   &&&\color{cyan}\llparenthesis \color{black}id_{Fun}(\overline{Exp}) \color{cyan}\rrparenthesis^A \color{black}=
   \begin{cases}
     id_{Fun}(\overline{\color{cyan}\llparenthesis \color{black}Exp \color{cyan}\rrparenthesis^A}) &\color{black}\text{if}~~ \color{cyan}A \color{black} \in \text{rolesOf} (id_{Fun}(\overline{Exp}))\\
@@ -102,21 +106,23 @@ Projection To Python
   &&&\color{cyan}\llparenthesis \color{black}Exp.id_{Fun}(\overline{Exp}) \color{cyan}\rrparenthesis^A \color{black}=
   \begin{cases}
     \color{cyan}\llparenthesis \color{black}Exp \color{cyan}\rrparenthesis^A \color{black}.id_{Fun}(\overline{\color{cyan}\llparenthesis \color{black}Exp \color{cyan}\rrparenthesis^A}) &\text{if}~~ \color{cyan}A \color{black} \in \text{rolesOf}(Exp)\\
-    \texttt{Unit.id}_\texttt{Fun}(\overline{\color{cyan}\llparenthesis \color{black}Exp \color{cyan}\rrparenthesis^A}) &\color{black} \text{othewise}
+    \texttt{Unit.id}_\texttt{Fun}(\color{cyan}\llparenthesis \color{black}Exp \color{cyan}\rrparenthesis^A\color{black},\overline{\color{cyan}\llparenthesis \color{black}Exp \color{cyan}\rrparenthesis^A}) &\color{black} \text{otherwise}
   \end{cases}\\
   &&&\color{cyan}\llparenthesis \color{black}id_{Cls}@(\overline{\color{cyan}B}\color{black})(\overline{Exp}) \color{cyan}\rrparenthesis^A \color{black}=
   \begin{cases}
     \color{cyan}\llparenthesis \color{black}id_{Cls}@(\overline{\color{cyan}B}) \color{cyan}\rrparenthesis^A \color{black}(\overline{\color{cyan}\llparenthesis \color{black}Exp \color{cyan}\rrparenthesis^A}\color{black}) & \color{cyan}A \color{black} \in \overline{\color{cyan}B}\\
     \texttt{Unit.id}_\texttt{Cls}(\overline{\color{cyan}\llparenthesis \color{black}Exp \color{cyan}\rrparenthesis^A}) &\text{otherwise}
   \end{cases}\\
-  &&&\color{cyan}\llparenthesis \color{black}Exp~BinOp~Exp \color{cyan}\rrparenthesis^A \color{black}=
+  &&&\color{cyan}\llparenthesis \color{black}Exp_1~BinOp~Exp_2 \color{cyan}\rrparenthesis^A \color{black}=
   \begin{cases}
-    \color{cyan}\llparenthesis \color{black}Exp \color{cyan}\rrparenthesis^A \color{black} ~BinOp~ \color{cyan}\llparenthesis \color{black}Exp \color{cyan}\rrparenthesis^A & \color{black} \text{if}~~\text{roleOf}(Exp) = \{\color{cyan}A\color{black}\}\\
-    \texttt{Unit.id}(\color{cyan}\llparenthesis \color{black}Exp \color{cyan}\rrparenthesis^A \color{black}, \color{cyan}\llparenthesis \color{black}Exp \color{cyan}\rrparenthesis^A \color{black}) & \color{black} \text{if}~~\text{roleOf}(Exp) = \{\color{cyan}A'\color{black}\}
+    \color{cyan}\llparenthesis \color{black}Exp_1 \color{cyan}\rrparenthesis^A \color{black} ~BinOp~ \color{cyan}\llparenthesis \color{black}Exp_2 \color{cyan}\rrparenthesis^A \\
+    ~~~~~\color{black} \text{if}~~\text{roleOf}(Exp_1) = \text{roleOf}(Exp_2) = \{\color{cyan}A\color{black}\}\\
+    \texttt{Unit.id}(\color{cyan}\llparenthesis \color{black}Exp_1 \color{cyan}\rrparenthesis^A \color{black}, \color{cyan}\llparenthesis \color{black}Exp_2 \color{cyan}\rrparenthesis^A \color{black})  ~~~~~\color{black} \text{otherwise}
   \end{cases}\\
   &&&\text{rolesOf}(lit@(\overline{\color{cyan}B})) = {\overline{\color{cyan}B}}\\
   &&&\text{rolesOf}(Exp.id) = \overline{\color{cyan}B}~~~\text{if}~~\exists T.\text{typeOf}(Exp.id) = T@(\overline{\color{cyan}B})\\
   &&&\text{typeOf}:Exp \rightarrow Type\\
-  &&&\text{rolesOf}(id_{Fun}.(\overline{Exp})) = \overline{\color{cyan}B}~~~\text{if}~~\exists T.\text{typeOf}(id_{Fun}.(\overline{Exp})) = T@(\overline{\color{cyan}B})\\
+  &&&\text{rolesOf}(id_{Fun}(\overline{Exp})) = \overline{\color{cyan}B}~~~\text{if}~~\exists T.\text{typeOf}(id_{Fun}(\overline{Exp})) = T@(\overline{\color{cyan}B})\\
+  &&&\text{rolesOf}(Exp.id_{Fun}(\overline{Exp})) = \overline{\color{cyan}B}~~~\text{if}~~\exists T.\text{typeOf}(Exp.id_{Fun}(\overline{Exp})) = T@(\overline{\color{cyan}B})\\
 \end{alignat*}
 \end{document}

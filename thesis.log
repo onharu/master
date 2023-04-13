@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.141592653-p3.9.0-210218-2.6 (utf8.euc) (TeX Live 2021) (preloaded format=platex 2021.7.16)  11 APR 2023 11:24
+This is e-pTeX, Version 3.141592653-p3.9.0-210218-2.6 (utf8.euc) (TeX Live 2021) (preloaded format=platex 2021.7.16)  13 APR 2023 08:40
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -816,12 +816,12 @@ LaTeX Font Info:    Trying to load font information for U+bbold on input line 7
 9.
 
 (/usr/local/texlive/2021/texmf-dist/tex/latex/bbold/Ubbold.fd)
-Overfull \hbox (32.23643pt too wide) detected at line 87
+Overfull \hbox (93.74881pt too wide) detected at line 87
 []
  []
 
 
-Overfull \hbox (65.58795pt too wide) detected at line 121
+Overfull \hbox (65.688pt too wide) detected at line 127
 []
  []
 
@@ -831,10 +831,10 @@ Overfull \hbox (65.58795pt too wide) detected at line 121
 Here is how much of TeX's memory you used:
  17803 strings out of 479005
  368224 string characters out of 5862675
- 760982 words of memory out of 5000000
+ 764982 words of memory out of 5000000
  35580 multiletter control sequences out of 15000+600000
  415010 words of font info for 77 fonts, out of 8000000 for 9000
  929 hyphenation exceptions out of 8191
- 102i,16n,108p,448b,300s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 102i,16n,108p,448b,265s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on thesis.dvi (1 page, 18136 bytes).
+Output written on thesis.dvi (1 page, 18864 bytes).
