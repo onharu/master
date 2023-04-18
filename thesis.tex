@@ -74,12 +74,14 @@
 
 \usepackage{url}
 
+\newcommand{\projection}[2]{{\color{cyan}\llparenthesis}#1{\color{cyan}\rrparenthesis^#2}}
+
 \begin{document}
 Syntax
 \begin{alignat*}{3} %alignat{(行ごとの＆の個数+1)/2}奇数番目の＆で揃え、偶数番目の＆はスペース
-  &\text{Literals} &&lit &&\Coloneqq None ~\mid~ True ~\mid~ False ~\mid~  \dots ~\mid~ 1 ~\mid~ \dots\\
-  &\text{Expression}~~~ &&Exp &&\Coloneqq lit@(\overline{A}) ~\mid~ Exp.id ~\mid~ Exp_1 ~ BinOp ~ Exp_2 \\
-  &&&&&~\mid~ id_{Fun}(\overline{Exp}) ~\mid~ Exp.id_{Fun}(\overline{Exp}) ~\mid~ id_{Cls}@(\overline{A}).(\overline{Exp})\\
+  &\text{Literals} &&lit &&\Coloneqq None ~\mid~ True ~\mid~ False ~\mid~ "a" ~\mid~ \dots ~\mid~ 1 ~\mid~ \dots\\
+  &\text{Expression}~~~ &&Exp &&\Coloneqq lit@(\overline{A}):\tau ~\mid~ Exp.id:\tau  ~\mid~ id_{Fun}(\overline{Exp}):\tau\\
+  &&&&&~~~~~\mid~ Exp.id_{Fun}(\overline{Exp}):\tau ~\mid~ id_{Cls}@(\overline{A}).(\overline{Exp}):\tau\\
   &&&id_{Fun} &&\Coloneqq f ~\mid~ g ~\mid~ \dots\\
   &&&id_{Cls} &&\Coloneqq C ~\mid~ D ~\mid~ \dots\\
   &\text{Assign Op.} &&AsgOp~~~ &&\in \{\texttt{=, +=, -=, *=, /=, \%=, //=}\}\\
@@ -88,41 +90,38 @@ Syntax
 
 Projection To Python
 \begin{alignat*}{2}
-  &(Exp)~~~ &&\color{cyan}\llparenthesis \color{black}lit@(\overline{\color{cyan}B}\color{black}) \color{cyan}\rrparenthesis^A \color{black}=
+  &(Exp)~~~ &&\projection{lit@(\overline{\color{cyan}{B}})}{A}=
   \begin{cases}
-    lit & \text{if}~~ \color{cyan}A \color{black}\in \overline{\color{cyan}B}\\
+    lit & \text{if}~~ {\color{cyan}A} \in \overline{\color{cyan}{B}}\\
     \texttt{Unit.id} &\text{otherwise}
   \end{cases}\\
-  &&&\color{cyan}\llparenthesis \color{black}Exp.id \color{cyan}\rrparenthesis^A \color{black}= 
+  &&&\projection{Exp.id}{A}=
   \begin{cases}
-    \color{cyan}\llparenthesis \color{black}Exp \color{cyan}\rrparenthesis^A \color{black}.id &\text{if}~~\color{cyan}A \color{black} \in \text{rolesOf} (Exp.id)\\
+    \projection{Exp}{A}.id &\text{if}~~{\color{cyan}A} \in \text{rolesOf} (Exp.id)\\
     \text{absent} &\text{otherwise}
   \end{cases}\\
-  &&&\color{cyan}\llparenthesis \color{black}id_{Fun}(\overline{Exp}) \color{cyan}\rrparenthesis^A \color{black}=
+  &&&\projection{id_{Fun}(\overline{Exp})}{A} =
   \begin{cases}
-    id_{Fun}(\overline{\color{cyan}\llparenthesis \color{black}Exp \color{cyan}\rrparenthesis^A}) &\color{black}\text{if}~~ \color{cyan}A \color{black} \in \text{rolesOf} (id_{Fun}(\overline{Exp}))\\
-    \texttt{Unit.id}_\texttt{Fun}(\overline{\color{cyan}\llparenthesis \color{black}Exp \color{cyan}\rrparenthesis^A}) &\color{black} \text{otherwise}
+    id_{Fun}(\overline{\projection{Exp}{A}}) &\text{if}~~ {\color{cyan}A} \in \text{rolesOf} (id_{Fun}(\overline{Exp}))\\
+    \texttt{Unit.id}_\texttt{Fun}(\overline{\projection{Exp}{A}}) &\text{otherwise}
   \end{cases}\\
-  &&&\color{cyan}\llparenthesis \color{black}Exp.id_{Fun}(\overline{Exp}) \color{cyan}\rrparenthesis^A \color{black}=
+  &&&\projection{Exp.id_{Fun}(\overline{Exp})}{A}=
   \begin{cases}
-    \color{cyan}\llparenthesis \color{black}Exp \color{cyan}\rrparenthesis^A \color{black}.id_{Fun}(\overline{\color{cyan}\llparenthesis \color{black}Exp \color{cyan}\rrparenthesis^A}) &\text{if}~~ \color{cyan}A \color{black} \in \text{rolesOf}(Exp)\\
-    \texttt{Unit.id}_\texttt{Fun}(\color{cyan}\llparenthesis \color{black}Exp \color{cyan}\rrparenthesis^A\color{black},\overline{\color{cyan}\llparenthesis \color{black}Exp \color{cyan}\rrparenthesis^A}) &\color{black} \text{otherwise}
+    \projection{Exp}{A}.id_{Fun}(\overline{\projection{Exp}{A}}) &\text{if}~~ {\color{cyan}A} \in \text{rolesOf}(Exp)\\
+    \texttt{Unit.id}_\texttt{Fun}(\projection{Exp}{A},\overline{\projection{Exp}{A}}) &\color{black} \text{otherwise}
   \end{cases}\\
-  &&&\color{cyan}\llparenthesis \color{black}id_{Cls}@(\overline{\color{cyan}B}\color{black})(\overline{Exp}) \color{cyan}\rrparenthesis^A \color{black}=
+  &&&\projection{id_{Cls}@(\overline{\color{cyan}B})(\overline{Exp})}{A}=
   \begin{cases}
-    \color{cyan}\llparenthesis \color{black}id_{Cls}@(\overline{\color{cyan}B}) \color{cyan}\rrparenthesis^A \color{black}(\overline{\color{cyan}\llparenthesis \color{black}Exp \color{cyan}\rrparenthesis^A}\color{black}) & \color{cyan}A \color{black} \in \overline{\color{cyan}B}\\
-    \texttt{Unit.id}_\texttt{Cls}(\overline{\color{cyan}\llparenthesis \color{black}Exp \color{cyan}\rrparenthesis^A}) &\text{otherwise}
+    \projection{id_{Cls}@(\overline{\color{cyan}B})}{A} (\overline{\projection{Exp}{A}}) & {\color{cyan}A} \in \overline{\color{cyan}B}\\
+    \texttt{Unit.id}_\texttt{Cls}(\overline{\projection{Exp}{A}}) &\text{otherwise}
   \end{cases}\\
-  &&&\color{cyan}\llparenthesis \color{black}Exp_1~BinOp~Exp_2 \color{cyan}\rrparenthesis^A \color{black}=
-  \begin{cases}
-    \color{cyan}\llparenthesis \color{black}Exp_1 \color{cyan}\rrparenthesis^A \color{black} ~BinOp~ \color{cyan}\llparenthesis \color{black}Exp_2 \color{cyan}\rrparenthesis^A \\
-    ~~~~~\color{black} \text{if}~~\text{roleOf}(Exp_1) = \text{roleOf}(Exp_2) = \{\color{cyan}A\color{black}\}\\
-    \texttt{Unit.id}(\color{cyan}\llparenthesis \color{black}Exp_1 \color{cyan}\rrparenthesis^A \color{black}, \color{cyan}\llparenthesis \color{black}Exp_2 \color{cyan}\rrparenthesis^A \color{black})  ~~~~~\color{black} \text{otherwise}
-  \end{cases}\\
-  &&&\text{rolesOf}(lit@(\overline{\color{cyan}B})) = {\overline{\color{cyan}B}}\\
-  &&&\text{rolesOf}(Exp.id) = \overline{\color{cyan}B}~~~\text{if}~~\exists T.\text{typeOf}(Exp.id) = T@(\overline{\color{cyan}B})\\
-  &&&\text{typeOf}:Exp \rightarrow Type\\
-  &&&\text{rolesOf}(id_{Fun}(\overline{Exp})) = \overline{\color{cyan}B}~~~\text{if}~~\exists T.\text{typeOf}(id_{Fun}(\overline{Exp})) = T@(\overline{\color{cyan}B})\\
-  &&&\text{rolesOf}(Exp.id_{Fun}(\overline{Exp})) = \overline{\color{cyan}B}~~~\text{if}~~\exists T.\text{typeOf}(Exp.id_{Fun}(\overline{Exp})) = T@(\overline{\color{cyan}B})\\
+  &&&\text{rolesOf}(lit@(\overline{\color{cyan}B}):\tau@\overline{\color{cyan}B}) = {\overline{\color{cyan}B}}\\
+  &&&\text{rolesOf}(Exp.id:\tau@\overline{\color{cyan}B}) = \overline{\color{cyan}B}\\
+  &&&\text{rolesOf}(Exp.id:\tau) = \overline{\color{cyan}B} ~~~\text{if}~~ \text{rolesOf}(Exp)=\overline{\color{cyan}B}\\
+  &&&\text{rolesOf}(id_{Fun}(\overline{Exp}):\tau @ \overline{\color{cyan}B}) = \overline{\color{cyan}B}\\
+  &&&\text{rolesOf}(id_{Fun}(\overline{Exp}):\tau) = \overline{\color{cyan}B}~~~\text{if}~~\text{rolesOf}(\overline{Exp})=\overline{\color{cyan}B}\\
+  &&&\text{rolesOf}(Exp.id_{Fun}(\overline{Exp}):\tau @ \overline{\color{cyan}B}) = \overline{\color{cyan}B}\\
+  &&&\text{rolesOf}(Exp.id_{Fun}(\overline{Exp}):\tau) = \overline{\color{cyan}B}~~~\text{if}~~\text{rolesOf}(Exp)=\overline{\color{cyan}B}\\
+  &&&\text{rolesOf}(id_{Cls}@(\overline{\color{cyan}B}).(\overline{Exp}):\tau @ \overline{\color{cyan}B}) = \overline{\color{cyan}B}\\
 \end{alignat*}
 \end{document}

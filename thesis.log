@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.141592653-p3.9.0-210218-2.6 (utf8.euc) (TeX Live 2021) (preloaded format=platex 2021.7.16)  13 APR 2023 08:40
+This is e-pTeX, Version 3.141592653-p3.9.0-210218-2.6 (utf8.euc) (TeX Live 2021) (preloaded format=platex 2021.7.16)  18 APR 2023 00:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -778,50 +778,50 @@ Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 ) (./thesis.aux)
 \openout1 = `thesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 77.
-LaTeX Font Info:    ... okay on input line 77.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 77.
-LaTeX Font Info:    ... okay on input line 77.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 77.
-LaTeX Font Info:    ... okay on input line 77.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 77.
-LaTeX Font Info:    ... okay on input line 77.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 77.
-LaTeX Font Info:    ... okay on input line 77.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 77.
-LaTeX Font Info:    ... okay on input line 77.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 77.
-LaTeX Font Info:    ... okay on input line 77.
-LaTeX Font Info:    Checking defaults for JY1/mc/m/n on input line 77.
-LaTeX Font Info:    ... okay on input line 77.
-LaTeX Font Info:    Checking defaults for JT1/mc/m/n on input line 77.
-LaTeX Font Info:    ... okay on input line 77.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 79.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 79.
+LaTeX Font Info:    ... okay on input line 79.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 79.
+LaTeX Font Info:    ... okay on input line 79.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 79.
+LaTeX Font Info:    ... okay on input line 79.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 79.
+LaTeX Font Info:    ... okay on input line 79.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 79.
+LaTeX Font Info:    ... okay on input line 79.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 79.
+LaTeX Font Info:    ... okay on input line 79.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 79.
+LaTeX Font Info:    ... okay on input line 79.
+LaTeX Font Info:    Checking defaults for JY1/mc/m/n on input line 79.
+LaTeX Font Info:    ... okay on input line 79.
+LaTeX Font Info:    Checking defaults for JT1/mc/m/n on input line 79.
+LaTeX Font Info:    ... okay on input line 79.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 81.
 
 
 (/usr/local/texlive/2021/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 79.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 81.
 
 
 (/usr/local/texlive/2021/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Trying to load font information for U+stmry on input line 7
-9.
+LaTeX Font Info:    Trying to load font information for U+stmry on input line 8
+1.
 
 (/usr/local/texlive/2021/texmf-dist/tex/latex/stmaryrd/Ustmry.fd)
-LaTeX Font Info:    Trying to load font information for U+bbold on input line 7
-9.
+LaTeX Font Info:    Trying to load font information for U+bbold on input line 8
+1.
 
 (/usr/local/texlive/2021/texmf-dist/tex/latex/bbold/Ubbold.fd)
-Overfull \hbox (93.74881pt too wide) detected at line 87
+Overfull \hbox (93.74881pt too wide) detected at line 89
 []
  []
 
 
-Overfull \hbox (65.688pt too wide) detected at line 127
+Overfull \hbox (65.688pt too wide) detected at line 126
 []
  []
 
@@ -829,12 +829,12 @@ Overfull \hbox (65.688pt too wide) detected at line 127
 
 ] (./thesis.aux) ) 
 Here is how much of TeX's memory you used:
- 17803 strings out of 479005
- 368224 string characters out of 5862675
- 764982 words of memory out of 5000000
- 35580 multiletter control sequences out of 15000+600000
+ 17804 strings out of 479005
+ 368234 string characters out of 5862675
+ 767008 words of memory out of 5000000
+ 35581 multiletter control sequences out of 15000+600000
  415010 words of font info for 77 fonts, out of 8000000 for 9000
  929 hyphenation exceptions out of 8191
- 102i,16n,108p,448b,265s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 102i,16n,108p,448b,248s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on thesis.dvi (1 page, 18864 bytes).
+Output written on thesis.dvi (1 page, 17552 bytes).
