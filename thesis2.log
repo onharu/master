@@ -1,9 +1,9 @@
-This is e-pTeX, Version 3.141592653-p3.9.0-210218-2.6 (utf8.euc) (TeX Live 2021) (preloaded format=platex 2021.7.16)  2 MAY 2023 12:06
+This is e-pTeX, Version 3.141592653-p3.9.0-210218-2.6 (utf8.euc) (TeX Live 2021) (preloaded format=platex 2021.7.16)  16 MAY 2023 16:13
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**thesis.tex
-(./thesis.tex
+**thesis2.tex
+(./thesis2.tex
 pLaTeX2e <2021-06-01>+2 (based on LaTeX2e <2021-06-01> patch level 1)
 L3 programming layer <2021-07-12>
 (/usr/local/texlive/2021/texmf-dist/tex/platex/base/jarticle.cls
@@ -775,8 +775,9 @@ Package: mathbbol 1995/01/01
 (/usr/local/texlive/2021/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip17
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
-) (./thesis.aux)
-\openout1 = `thesis.aux'.
+)
+No file thesis2.aux.
+\openout1 = `thesis2.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 79.
 LaTeX Font Info:    ... okay on input line 79.
@@ -798,7 +799,6 @@ LaTeX Font Info:    Checking defaults for JT1/mc/m/n on input line 79.
 LaTeX Font Info:    ... okay on input line 79.
 LaTeX Font Info:    Trying to load font information for U+msa on input line 81.
 
-
 (/usr/local/texlive/2021/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
@@ -816,25 +816,25 @@ LaTeX Font Info:    Trying to load font information for U+bbold on input line 8
 1.
 
 (/usr/local/texlive/2021/texmf-dist/tex/latex/bbold/Ubbold.fd)
-Overfull \hbox (93.74881pt too wide) detected at line 90
+Overfull \hbox (128.11967pt too wide) detected at line 90
 []
  []
 
 
-Overfull \hbox (76.00255pt too wide) detected at line 133
+Overfull \hbox (94.93385pt too wide) detected at line 139
 []
  []
 
 [1
 
-] (./thesis.aux) ) 
+] (./thesis2.aux) ) 
 Here is how much of TeX's memory you used:
- 17805 strings out of 479005
- 368252 string characters out of 5862675
- 770009 words of memory out of 5000000
+ 17803 strings out of 479005
+ 368239 string characters out of 5862675
+ 772021 words of memory out of 5000000
  35582 multiletter control sequences out of 15000+600000
  415010 words of font info for 77 fonts, out of 8000000 for 9000
  929 hyphenation exceptions out of 8191
- 102i,20n,108p,448b,248s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 102i,20n,108p,449b,248s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on thesis.dvi (1 page, 17784 bytes).
+Output written on thesis2.dvi (1 page, 17976 bytes).
