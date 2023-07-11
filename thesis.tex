@@ -74,8 +74,15 @@
 
 \usepackage{url}
 
+<<<<<<< HEAD
 \newcommand{\projection}[2]{{\color{cyan}\llparenthesis}#1{\color{cyan}\rrparenthesis^#2}}
 
+=======
+% ここからマクロ
+\newcommand{\projection}[2]{{\color{cyan}\llparenthesis}#1{\color{cyan}\rrparenthesis^#2}}
+
+
+>>>>>>> refs/remotes/origin/main
 \begin{document}
 Syntax
 \begin{alignat*}{3} %alignat{(行ごとの＆の個数+1)/2}奇数番目の＆で揃え、偶数番目の＆はスペース
@@ -91,6 +98,7 @@ Syntax
 
 Projection To Python
 \begin{alignat*}{2}
+<<<<<<< HEAD
   &(Exp)~~~ &&\projection{lit@(\overline{\color{cyan}{B}}):\tau}{A}=
   \begin{cases}
     lit & \text{if}~~ {\color{cyan}A} \in \overline{\color{cyan}{B}}\\
@@ -130,5 +138,43 @@ Projection To Python
   %&&&\text{rolesOf}(Exp.id_{Fun}(\overline{Exp}):\tau @ \overline{\color{cyan}B}) = \overline{\color{cyan}B}\\
   &&&\text{rolesOf}(Exp.id_{Fun}(\overline{Exp}):\tau) = \overline{\color{cyan}B}~~~\text{if}~~\text{rolesOf}(Exp)=\overline{\color{cyan}B}\\
   %&&&\text{rolesOf}(id_{Cls}@(\overline{\color{cyan}B}).(\overline{Exp}):\tau @ \overline{\color{cyan}B}) = \overline{\color{cyan}B}\\
+=======
+  &(Exp)~~~ &&\projection{lit@(\overline{\color{cyan}{B}})}{A}=
+  \begin{cases}
+    lit & \text{if}~~ \color{cyan}{A}\in \overline{\color{cyan}{B}}\\
+    \texttt{Unit.id} &\text{otherwise}
+  \end{cases}\\
+  &&&\projection{Exp.id}{A}= 
+  \begin{cases}
+    \projection{Exp}{A}.id &\text{if}~~\color{cyan}{A} \in \text{rolesOf} (Exp.id)\\
+    \text{absent} &\text{otherwise}
+  \end{cases}\\
+  &&&\projection{id_{Fun}(\overline{Exp})}{A}=
+  \begin{cases}
+    id_{Fun}(\overline{\projection{Exp}{A}}) &\color{black}\text{if}~~ \color{cyan}A \color{black} \in \text{rolesOf} (id_{Fun}(\overline{Exp}))\\
+    \texttt{Unit.id}_\texttt{Fun}(\overline{\projection{Exp}{A}}) &\color{black} \text{otherwise}
+  \end{cases}\\
+  &&&\projection{Exp.id_{Fun}(\overline{Exp})}{A}=
+  \begin{cases}
+    \projection{Exp}{A}.id_{Fun}(\overline{\projection{Exp}{A}}) &\text{if}~~ \color{cyan}A \color{black} \in \text{rolesOf}(Exp)\\
+    \texttt{Unit.id}_\texttt{Fun}(\projection{Exp}{A}\color{black},\overline{\projection{Exp}{A}}) &\color{black} \text{otherwise}
+  \end{cases}\\
+  &&&\projection{id_{Cls}@(\overline{\color{cyan}B}\color{black})(\overline{Exp})}{A}=
+  \begin{cases}
+    \projection{id_{Cls}@(\overline{\color{cyan}B})}{A}(\overline{\projection{Exp}{A}}\color{black}) & \color{cyan}A \color{black} \in \overline{\color{cyan}B}\\
+    \texttt{Unit.id}_\texttt{Cls}(\overline{\projection{Exp}{A}}) &\text{otherwise}
+  \end{cases}\\
+  &&&\projection{Exp_1~BinOp~Exp_2}{A}=
+  \begin{cases}
+    \projection{Exp_1}{A} ~BinOp~ \projection{Exp_2}{A} \\
+    ~~~~~\color{black} \text{if}~~\text{roleOf}(Exp_1) = \text{roleOf}(Exp_2) = \{\color{cyan}A\color{black}\}\\
+    \texttt{Unit.id}(\projection{Exp_1}{A}, \projection{Exp_2}{A})  ~~~~~\color{black} \text{otherwise}
+  \end{cases}\\
+  &&&\text{rolesOf}(lit@(\overline{\color{cyan}B})) = {\overline{\color{cyan}B}}\\
+  &&&\text{rolesOf}(Exp.id) = \overline{\color{cyan}B}~~~\text{if}~~\exists T.\text{typeOf}(Exp.id) = T@(\overline{\color{cyan}B})\\
+  &&&\text{typeOf}:Exp \rightarrow Type\\
+  &&&\text{rolesOf}(id_{Fun}(\overline{Exp})) = \overline{\color{cyan}B}~~~\text{if}~~\exists T.\text{typeOf}(id_{Fun}(\overline{Exp})) = T@(\overline{\color{cyan}B})\\
+  &&&\text{rolesOf}(Exp.id_{Fun}(\overline{Exp})) = \overline{\color{cyan}B}~~~\text{if}~~\exists T.\text{typeOf}(Exp.id_{Fun}(\overline{Exp})) = T@(\overline{\color{cyan}B})\\
+>>>>>>> refs/remotes/origin/main
 \end{alignat*}
 \end{document}
