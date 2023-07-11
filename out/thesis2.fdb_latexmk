@@ -1,14 +1,20 @@
 # Fdb version 3
-["dvipdf"] 1686108540 "out/thesis2.dvi" "out/thesis2.pdf" "out/thesis2" 1686108541
-  "out/thesis2.dvi" 1686108540 18936 546fcee37c08c0ee3a11cc7f01b3ef72 "latex"
+["dvipdf"] 1689036657 "out/thesis2.dvi" "out/thesis2.pdf" "out/thesis2" 1689036658
+  "out/thesis2.dvi" 1689036657 24704 4c56221ddf6ad2f04df446e103813925 "latex"
   (generated)
   "out/thesis2.pdf"
-["latex"] 1686108539 "/Users/onda/master/thesis2.tex" "out/thesis2.dvi" "thesis2" 1686108541
-  "/Users/onda/master/thesis2.tex" 1686108539 6865 dd59041d0e66c449f821cb620adc81d2 ""
+["latex"] 1689036656 "/Users/onda/master/thesis2.tex" "out/thesis2.dvi" "thesis2" 1689036658
+  "/Users/onda/master/thesis2.tex" 1689036656 9205 a4a5be70ce9540fcef66d83aabd2a3e6 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
+  "/usr/local/texlive/2021/texmf-dist/fonts/tfm/ptex-fonts/standard/goth10.tfm" 1463434352 1196 5981e79c37b2cfd27b3612a6783cd4b6 ""
+  "/usr/local/texlive/2021/texmf-dist/fonts/tfm/ptex-fonts/standard/goth6.tfm" 1463434352 1196 977af188465e721f1f65facb66282510 ""
+  "/usr/local/texlive/2021/texmf-dist/fonts/tfm/ptex-fonts/standard/goth8.tfm" 1463434352 1196 f76ab7ae43ed1dfe29b9e6ec2933fdb4 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/ptex-fonts/standard/min10.tfm" 1463434352 1196 1be730212205a270378fba11a44765dc ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/ptex-fonts/standard/min6.tfm" 1463434352 1196 ede67ffb8cb4a6a8b9436c82b428664c ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/ptex-fonts/standard/min8.tfm" 1463434352 1196 d5b431ce76e19b70391960a9dd08fa4f ""
+  "/usr/local/texlive/2021/texmf-dist/fonts/tfm/ptex-fonts/standard/tgoth10.tfm" 1463434352 856 7404843a5f798859944d7973a47821d5 ""
+  "/usr/local/texlive/2021/texmf-dist/fonts/tfm/ptex-fonts/standard/tgoth6.tfm" 1463434352 856 29a8f8e24a069e7c876dbadd823f6c59 ""
+  "/usr/local/texlive/2021/texmf-dist/fonts/tfm/ptex-fonts/standard/tgoth8.tfm" 1463434352 856 8bfd9428b6290f70fd02322c8acb67da ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/ptex-fonts/standard/tmin10.tfm" 1463434352 856 39c171483fe1bb7d0e1368980c0c205b ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/ptex-fonts/standard/tmin6.tfm" 1463434352 856 e782a1e1d78799594d137f0fef162b39 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/ptex-fonts/standard/tmin8.tfm" 1463434352 856 bdef40bcf3aed4751efa9be9bfa6eb4b ""
@@ -21,6 +27,9 @@
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/public/bbold/bbold10.tfm" 1266369035 788 aa2bfd021367054a224c4cf5a9967398 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/public/bbold/bbold6.tfm" 1266369035 764 bc340104b2499eb440977e2d302aad8b ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/public/bbold/bbold8.tfm" 1266369035 768 b3927d32cc38bf306f676b7e9ddf7414 ""
+  "/usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm" 1136768653 1328 c834bbb027764024c09d3d2bf908b5f0 ""
+  "/usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmbx6.tfm" 1136768653 1344 8a0be4fe4d376203000810ad4dc81558 ""
+  "/usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmbx8.tfm" 1136768653 1332 1fde11373e221473104d6cc5993f046e ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmex10.tfm" 1136768653 992 662f679a0b3d2d53c1b94050fdaa3f50 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmmi10.tfm" 1136768653 1528 abec98dbc43e172678c11b3b9031252a ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmmi6.tfm" 1136768653 1512 f21f83efb36853c0b70002322c1ab3ad ""
@@ -28,6 +37,7 @@
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmr10.tfm" 1136768653 1296 45809c5a464d5f32c8f98ba97c1bb47f ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmr6.tfm" 1136768653 1300 b62933e007d01cfd073f79b963c01526 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmr8.tfm" 1136768653 1292 21c1c5bfeaebccffdb478fd231a0997d ""
+  "/usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmssbx10.tfm" 1136768653 1272 e2d13f0df30bf3ad990bb9d028e37f34 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm" 1136768653 1124 6c73e740cf17375f03eec0ee63599741 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmsy6.tfm" 1136768653 1116 933a60c408fc0a863a92debe84b2d294 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmsy8.tfm" 1136768653 1120 8b7d695260f3cff42e636090a8002094 ""
@@ -133,6 +143,7 @@
   "/usr/local/texlive/2021/texmf-dist/tex/latex/graphics-cfg/graphics.cfg" 1465944070 1224 978390e9c2234eab29404bc21b268d1e ""
   "/usr/local/texlive/2021/texmf-dist/tex/latex/graphics-def/dvips.def" 1498170935 5895 4b59bd0c17e1116fd6b6e7c683dea655 ""
   "/usr/local/texlive/2021/texmf-dist/tex/latex/graphics/color.sty" 1622581934 7153 17c23e5e586ebbdf5d269e7867e53cef ""
+  "/usr/local/texlive/2021/texmf-dist/tex/latex/graphics/dvipsnam.def" 1622581934 4995 8040f614c8de8318a0b5b2dea8a3fcef ""
   "/usr/local/texlive/2021/texmf-dist/tex/latex/graphics/graphics.sty" 1622581934 18399 7e40f80366dffb22c0e7b70517db5cb4 ""
   "/usr/local/texlive/2021/texmf-dist/tex/latex/graphics/graphicx.sty" 1622581934 7972 81ea1752666dc7c1e93f0b4c10665ca1 ""
   "/usr/local/texlive/2021/texmf-dist/tex/latex/graphics/keyval.sty" 1622581934 2671 4de6781a30211fe0ea4c672e4a2a8166 ""
@@ -174,9 +185,9 @@
   "/usr/local/texlive/2021/texmf-dist/web2c/texmf.cnf" 1621028613 40042 fe981136cbb5f3715ab1b0e46e3d3892 ""
   "/usr/local/texlive/2021/texmf-var/web2c/eptex/platex.fmt" 1626447048 2756591 b5f98b6f6ecec28b627412e4fa021240 ""
   "/usr/local/texlive/2021/texmf.cnf" 1616695596 577 4c1911a7228e554c6032256d3cf5567d ""
-  "out/thesis2.aux" 1686108540 67 1ef9204e575c5392681f20eea05cdd6d "latex"
-  "thesis2.tex" 1686108539 6865 dd59041d0e66c449f821cb620adc81d2 ""
+  "out/thesis2.aux" 1689036657 67 1ef9204e575c5392681f20eea05cdd6d "latex"
+  "thesis2.tex" 1689036656 9205 a4a5be70ce9540fcef66d83aabd2a3e6 ""
   (generated)
-  "out/thesis2.log"
   "out/thesis2.aux"
   "out/thesis2.dvi"
+  "out/thesis2.log"

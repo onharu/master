@@ -12,6 +12,7 @@
 \usepackage{ebproof}
 \usepackage{nicefrac}
 \usepackage{float} % \begin{figure}[H]
+\usepackage[dvipsnames]{xcolor}
 % \usepackage{makecell}
 % \usepackage{graphicx,graphics}
 % \graphicspath{{./figures/}}
@@ -75,18 +76,21 @@
 \usepackage{url}
 
 \newcommand{\projection}[2]{{\color{cyan}\llparenthesis}#1{\color{cyan}\rrparenthesis^#2}}
+\newcommand{\gray}[1]{\textbf{\textsf{\color{Gray}#1}}}
+\newcommand{\cyan}[1]{\color{cyan}#1}
+\newcommand{\nl}[1]{{\color{red}{\llbracket}}#1{\color{red}{\rrbracket}}}
 
 \begin{document}
 Syntax
 \begin{alignat*}{3} %alignat{(行ごとの＆の個数+1)/2}奇数番目の＆で揃え、偶数番目の＆はスペース
   &\text{Literals} &&lit &&\Coloneqq None ~\mid~ True ~\mid~ False ~\mid~ "a" ~\mid~ \dots ~\mid~ 1 ~\mid~ \dots\\
-  &\text{Expression}~~~ &&Exp &&\Coloneqq lit@(\overline{A}) ~\mid~ Exp.id  ~\mid~ f(\overline{Exp}) ~\mid~ Exp.f(\overline{Exp}) ~\mid~ C@(\overline{A}).(\overline{Exp})\\
-  &\text{Typed Expression}~~~ &&TExp &&\Coloneqq lit@(\overline{A}):\tau ~\mid~ \dots\\
+  &\text{Expression}~~~ &&Exp &&\Coloneqq lit\gray{@}(\overline{A}) ~\mid~ Exp.id  ~\mid~ f(\overline{Exp}) ~\mid~ Exp.f(\overline{Exp}) ~\mid~ C[\overline{A}](\overline{Exp})\\
+  &\text{Typed Expression}~~~ &&TExp &&\Coloneqq lit\gray{@}(\overline{A}):\tau ~\mid~ \dots\\
   &\text{Assign Op.} &&AsgOp~~~ &&\in \{\texttt{=, +=, -=, *=, /=, \%=, //=}\}\\
   &\text{Binary Op.} &&BinOp &&\in \{\texttt{||, \&\&, |, \&, ==, !=, <, >, <=, >=, +, -, *, /, \%, **}\}\\
-  &\text{Statement} &&Stm &&\Coloneqq \text{pass} ~\mid~ \text{return}~~ Exp ~\mid~ Exp \cdot Stm ~\mid~ id = Exp \cdot Stm \\
-  &&&&& ~\mid~ Exp_1~AsgOp~Exp_2 \cdot Stm ~\mid~ \text{if}~~Exp:Stm~~\text{else}:Stm\\
-  &&&&& ~\mid~ \text{try}:Stm ~~ \text{except}:\text{raise}~Exp~;~Stm
+  &\text{Statement} &&Stm &&\Coloneqq \gray{pass} ~\mid~ \gray{return}~~ Exp ~\mid~ Exp ~; Stm ~\mid~ id = Exp ~; Stm \\
+  &&&&& ~\mid~ Exp_1~AsgOp~Exp_2 ~; Stm ~\mid~ \gray{if}~~Exp:Stm_1~;\gray{else}:Stm_2 ~;Stm\\
+  &&&&& ~\mid~ \gray{try}:Stm ~~ \gray{except}:~Exp~;Stm ~\mid~ \gray{raise} ~~Exp
 \end{alignat*}
 
 
@@ -96,51 +100,96 @@ Syntax
 
 Projection To Python
 \begin{alignat*}{2}
-  &(Exp)~~~ &&\projection{lit@(\overline{\color{cyan}{B}}):\tau}{A}=
+  &(Exp)~~~ &&\projection{lit\gray{@}(\overline{\color{cyan}{B}}):\tau}{A}=
   \begin{cases}
     lit & \text{if}~~ {\color{cyan}A} \in \overline{\color{cyan}{B}}\\
     \texttt{Unit.id} &\text{otherwise}
   \end{cases}\\
+  %field
   &&&\projection{Exp.id:\tau}{A}=
   \begin{cases}
     \projection{Exp}{A}.id &\text{if}~~{\color{cyan}A} \in \text{rolesOf} (Exp.id)\\
     \text{absent} &\text{otherwise}
   \end{cases}\\
+  %function
   &&&\projection{f(\overline{Exp}):\tau}{A} =
   \begin{cases}
-    f(\overline{\projection{Exp}{A}}) &\text{if}~~ {\color{cyan}A} \in \text{rolesOf} (\overline{Exp}) \wedge {\color{cyan}A} \in \text{rolesOf} (f(\overline{Exp}))\\
-    f(\projection{\texttt{Unit.id}}{A}) &\text{if}~~ {\color{cyan}A} \notin \text{rolesOf}(\overline{Exp}) \wedge {\color{cyan}A} \in \text{rolesOf} (f(\overline{Exp}))\\
+    f(\overline{\projection{Exp}{A}}) &\text{if}~~ {\color{cyan}A} \in \text{rolesOf} (f(\overline{Exp}))\\
+    %f(\projection{\texttt{Unit.id}}{A}) &\text{if}~~ {\color{cyan}A} \notin \text{rolesOf}(\overline{Exp}) \wedge {\color{cyan}A} \in \text{rolesOf} (f(\overline{Exp}))\\
+    \texttt{Unit.id}(f(\overline{\projection{Exp}{A}})) &\text{if}~~ {\color{cyan}A} \in \text{rolesOf}(\overline{Exp}) \wedge {\color{cyan}A} \notin \text{rolesOf} (f(\overline{Exp}))\\
     \texttt{Unit.id}(\overline{\projection{Exp}{A}}) &\text{otherwise}
   \end{cases}\\
+  %method
   &&&\projection{Exp.f(\overline{Exp}):\tau}{A}=
   \begin{cases}
     \projection{Exp}{A}.f(\overline{\projection{Exp}{A}}) \\
-    ~~~~~\text{if}~~ {\color{cyan}A} \in \text{rolesOf}(Exp) \wedge {\color{cyan}A} \in \text{rolesOf}(\overline{Exp})\\
-    \projection{Exp}{A}.f(\projection{\texttt{Unit.id}}{A}) \\
-    ~~~~~\text{if}~~ {\color{cyan}A} \in \text{rolesOf}(Exp) \wedge {\color{cyan}A} \notin \text{rolesOf}(\overline{Exp}) \\
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\wedge {\color{cyan}A} \in \text{rolesOf}(Exp.f(\overline{Exp}))\\
+    ~~~~~~~\text{if}~~ {\color{cyan}A} \in \text{rolesOf}(Exp) \wedge {\color{cyan}A} \in \text{rolesOf}(\overline{Exp})\\
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \wedge {\color{cyan}A} \in \text{rolesOf}(Exp.f(\overline{Exp}))\\
+    \texttt{Unit.id}(\projection{Exp}{A}.f(\overline{\projection{Exp}{A}})) \\
+    ~~~~~~~\text{if}~~ {\color{cyan}A} \in \text{rolesOf}(Exp) \wedge {\color{cyan}A} \notin \text{rolesOf}(Exp.f(\overline{Exp}))\\
     \texttt{Unit.id}(\projection{Exp}{A},\overline{\projection{Exp}{A}}) ~~~~~\text{otherwise}
   \end{cases}\\
-  &&&\projection{C@(\overline{\color{cyan}B})(\overline{Exp}):\tau}{A}=
+  %create object
+  &&&\projection{C[\overline{\color{cyan}B}](\overline{Exp}):\tau}{A}=
   \begin{cases}
-    \projection{C@(\overline{\color{cyan}B})}{A} (\overline{\projection{Exp}{A}}) & {\color{cyan}A} \in \overline{\color{cyan}B}\\
+    \projection{C[\overline{\color{cyan}B}]}{A} (\overline{\projection{Exp}{A}}) & {\color{cyan}A} \in \overline{\color{cyan}B}\\
     \texttt{Unit.id}(\overline{\projection{Exp}{A}}) &\text{otherwise}
   \end{cases}\\
-  &&&\text{rolesOf}(\_:\tau@(\overline{\color{cyan}B})) = {\overline{\color{cyan}B}}\\
-  %&&&\text{rolesOf}(lit@(\overline{\color{cyan}B}):\tau@\overline{\color{cyan}B}) = {\overline{\color{cyan}B}}\\
-  %&&&\text{rolesOf}(Exp.id:\tau@\overline{\color{cyan}B}) = \overline{\color{cyan}B}\\
-  &&&\text{rolesOf}(Exp.id:\tau) = \overline{\color{cyan}B} ~~~\text{if}~~ \text{rolesOf}(Exp)=\overline{\color{cyan}B}\\
-  %&&&\text{rolesOf}(f(\overline{Exp}):\tau @ \overline{\color{cyan}B}) = \overline{\color{cyan}B}\\
-  &&&\text{rolesOf}(f(\overline{Exp}):\tau) = \overline{\color{cyan}B}~~~\text{if}~~\text{rolesOf}(\overline{Exp})=\overline{\color{cyan}B}\\
-  %&&&\text{rolesOf}(Exp.f(\overline{Exp}):\tau @ \overline{\color{cyan}B}) = \overline{\color{cyan}B}\\
-  &&&\text{rolesOf}(Exp.f(\overline{Exp}):\tau) = \overline{\color{cyan}B}~~~\text{if}~~\text{rolesOf}(Exp)=\overline{\color{cyan}B}\\
+  %role
+  &&&\text{rolesOf}(\_:\tau\gray{@}(\overline{\color{cyan}B})) = {\overline{\color{cyan}B}}\\
+  %&&&\text{rolesOf}(lit\gray{@}(\overline{\color{cyan}B}):\tau\gray{@}\overline{\color{cyan}B}) = {\overline{\color{cyan}B}}\\
+  %&&&\text{rolesOf}(Exp.id:\tau\gray{@}\overline{\color{cyan}B}) = \overline{\color{cyan}B}\\
+  %&&&\text{rolesOf}(Exp.id:\tau) = \overline{\color{cyan}B} ~~~\text{if}~~ \text{rolesOf}(Exp)=\overline{\color{cyan}B}\\
+  %&&&\text{rolesOf}(f(\overline{Exp}):\tau \gray{@} \overline{\color{cyan}B}) = \overline{\color{cyan}B}\\
+  %&&&\text{rolesOf}(f(\overline{Exp}):\tau) = \overline{\color{cyan}B}~~~\text{if}~~\text{rolesOf}(\overline{Exp})=\overline{\color{cyan}B}\\
+  %&&&\text{rolesOf}(Exp.f(\overline{Exp}):\tau \gray{@} \overline{\color{cyan}B}) = \overline{\color{cyan}B}\\
+  %&&&\text{rolesOf}(Exp.f(\overline{Exp}):\tau) = \overline{\color{cyan}B}~~~\text{if}~~\text{rolesOf}(Exp)=\overline{\color{cyan}B}\\
   &&&\text{rolesOf}(\overline{Exp}) = \bigcup_i \text{rolesOf}(Exp_i) \\
-  &&&\projection{\overline{Exp}}{A} = Exp'_1,Exp'_2,\cdots,Exp'_n ~~\text{where}~~ Exp'_i =
-  \begin{cases}
-    \projection{Exp_i}{A}  ~~\text{if}~ \text{rolesOf}(Exp_i) = \color{cyan}{A}\\
-    \texttt{Unit.id}
-  \end{cases}\\
-  %&&&\text{rolesOf}(C@(\overline{\color{cyan}B}).(\overline{Exp}):\tau @ \overline{\color{cyan}B}) = \overline{\color{cyan}B}\\
-  %&&&\text{typeOf}(Exp) = \tau ~~~~~\text{if}~~ Exp = lit@(\overline{A}):\tau ~\vee~ Exp.id:\tau  ~\vee~ f(\overline{Exp}):\tau ~\vee~ Exp.f(\overline{Exp}):\tau ~\vee~ C@(\overline{A}).(\overline{Exp}):\tau\\
+  &&&\projection{\overline{Exp}}{A} = Exp'_1,Exp'_2,\cdots,Exp'_n ~~\text{where}~~ Exp'_i = \projection{Exp_i}{A}\\  
+  %&&&\text{rolesOf}(C\gray{@}(\overline{\color{cyan}B}).(\overline{Exp}):\tau \gray{@} \overline{\color{cyan}B}) = \overline{\color{cyan}B}\\
+  %&&&\text{typeOf}(Exp) = \tau ~~~~~\text{if}~~ Exp = lit\gray{@}(\overline{A}):\tau ~\vee~ Exp.id:\tau  ~\vee~ f(\overline{Exp}):\tau ~\vee~ Exp.f(\overline{Exp}):\tau ~\vee~ C\gray{@}(\overline{A}).(\overline{Exp}):\tau\\
 \end{alignat*}
+\begin{alignat*}{2}
+  &(Stm)~~~ &&\projection{\gray{pass}}{A} = \gray{pass}\\
+  &&&\projection{\gray{return} ~ Exp;}{A} = \gray{return} \projection{Exp}{A}\\
+  &&&\projection{Exp;Stm}{A} =
+  \begin{cases}
+    \gray{match} ~\projection{Exp}{A}:\\
+    ~~~~~\gray{case} ~id: \projection{Stm}{A}; \\
+    %~~~~~\gray{case} ~\_\_: \projection{Stm}{A};\\
+    \projection{Exp}{A};\projection{Stm}{A} & \text{otherwise}\\
+  \end{cases}\\
+  &&& \projection{id = Exp~;Stm}{A} =
+  \begin{cases}
+    id = \projection{Exp}{A};\projection{Stm}{A} & \text{if}~~ {\color{cyan}A} \in \text{rolesOf}(id)\\
+    \projection{Exp}{A};\projection{Stm}{A} & \text{otherwise}
+  \end{cases}\\
+  &&& \projection{Exp_1 ~AsgOp~ Exp_2 ~; Stm}{A}=
+  \begin{cases}
+    \projection{Exp_1}{A} ~AsgOp~ \projection{Exp_2}{A} ~; \projection{Stm}{A} \\
+    ~~~~~~~~~~~~~~~\text{if}~~ {\cyan{A}} \in \text{rolesOf}(Exp_1 \wedge Exp_2) \\
+    \projection{Stm}{A} ~~~~~\text{otherwise}
+  \end{cases}\\
+  &&&\projection{\gray{if}~Exp:Stm_1~;\gray{else}:Stm_2 ~;Stm}{A}=\\
+  &&&
+  \begin{cases}
+    \gray{if}~\projection{Exp}{A} : \projection{Stm_1}{A} ~; \gray{else}:\projection{Stm_2}{A} ~;\projection{Stm}{A} & \text{if}~~ \text{typesOf}(Exp) = \texttt{boolean}\gray{@}\cyan{A}\\
+    \projection{Exp}{A} ~; \nl{\projection{Stm_1}{A}} {\color{red}\sqcup} \nl{\projection{Stm_2}{A}} ~;\projection{Stm}{A} & \text{otherwise}
+  \end{cases}\\
+  &&&\projection{\gray{try}:Stm ~~ \gray{except}:~Exp~;Stm}{A} =\\
+  &&&
+  \begin{cases}
+    \gray{try}:\projection{Stm}{A}~~\gray{except}:~ \projection{Exp}{A}~;\projection{Stm}{A} & \text{if}~~ {\cyan{A}} \in \text{rolesOf}(Exp)\\
+    \gray{try}:\projection{Stm}{A}~~;\projection{Stm}{A} & \text{otherwise}
+  \end{cases}\\
+  &&&\projection{\gray{raise} ~~Exp}{A} = 
+  \begin{cases}
+    \gray{raise} ~~\projection{Exp}{A} & \text{if}~~{\cyan{A}} \in \text{rolesOf}(Exp)\\
+    absent & \text{otherwise}
+  \end{cases}
+\end{alignat*}
+
+
+
+
 \end{document}
