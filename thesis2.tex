@@ -1,7 +1,7 @@
 \documentclass[11pt]{jarticle}
 
 \usepackage{amsmath} % already loaded in the beginning of the main file
-\usepackage{nccmath} % fleqnで左詰め
+\usepackage{nccmath} 
 \usepackage{amsfonts}
 \let\openbox\undefined
 \usepackage{amsthm} %% NOTE: incompatible with IPSJ class
@@ -75,13 +75,15 @@
 
 \usepackage{url}
 
+
 \newcommand{\projection}[2]{{\color{cyan}\llparenthesis}#1{\color{cyan}\rrparenthesis^#2}}
 \newcommand{\gray}[1]{\textbf{\textsf{\color{Gray}#1}}}
 \newcommand{\cyan}[1]{\color{cyan}#1}
-\newcommand{\nl}[1]{{\color{red}{\llbracket}}#1{\color{red}{\rrbracket}}}
+\newcommand{\nl}[1]{{\color{red}{\llbracket}}#1{\color{red}{\rrbracket}}} % Normalizer symbol
+\newcommand{\mg}{~{\color{red}{\sqcup}}~} % Merging symbol
 
 \begin{document}
-Syntax
+{\bf Syntax}
 \begin{alignat*}{3} %alignat{(行ごとの＆の個数+1)/2}奇数番目の＆で揃え、偶数番目の＆はスペース
   &\text{Literals} &&lit &&\Coloneqq None ~\mid~ True ~\mid~ False ~\mid~ "a" ~\mid~ \dots ~\mid~ 1 ~\mid~ \dots\\
   &\text{Expression}~~~ &&Exp &&\Coloneqq lit\gray{@}(\overline{A}) ~\mid~ Exp.id  ~\mid~ f(\overline{Exp}) ~\mid~ Exp.f(\overline{Exp}) ~\mid~ C[\overline{A}](\overline{Exp})\\
@@ -98,7 +100,7 @@ Syntax
 
 
 
-Projection To Python
+{\bf Projection To Python}
 \begin{alignat*}{2}
   &(Exp)~~~ &&\projection{lit\gray{@}(\overline{\color{cyan}{B}}):\tau}{A}=
   \begin{cases}
@@ -151,45 +153,92 @@ Projection To Python
 \end{alignat*}
 \begin{alignat*}{2}
   &(Stm)~~~ &&\projection{\gray{pass}}{A} = \gray{pass}\\
-  &&&\projection{\gray{return} ~ Exp;}{A} = \gray{return} \projection{Exp}{A}\\
+  &&&\projection{\gray{return} ~ Exp;}{A} = \gray{return} ~ \projection{Exp}{A}\\
   &&&\projection{Exp;Stm}{A} =
   \begin{cases}
-    \gray{match} ~\projection{Exp}{A}:\\
-    ~~~~~\gray{case} ~id: \projection{Stm}{A}; \\
-    %~~~~~\gray{case} ~\_\_: \projection{Stm}{A};\\
+    \gray{match} ~\projection{Exp}{A}: & \text{if}~~Exp = Exp.f(\overline{Exp}):\texttt{Enum}\gray{@}{\cyan{A}}~~~\text{and}\\
+    ~~~~~\gray{case} ~id: \projection{Stm'}{A}; &~~~~ \gray{@}\texttt{SelectionMethod} \in \texttt{annotationOf}(f)\\%&~~~~ {\cyan{A}} \in \text{rolesOf}(Exp.f(\overline{Exp})) ~~\text{and}\\
+    ~~~~~\gray{case} ~\_\_: \projection{Stm''}{A}; \\
+    \projection{Stm}{A}\\
     \projection{Exp}{A};\projection{Stm}{A} & \text{otherwise}\\
   \end{cases}\\
-  &&& \projection{id = Exp~;Stm}{A} =
+  &&& \projection{id:TE = Exp~;Stm}{A} =
   \begin{cases}
-    id = \projection{Exp}{A};\projection{Stm}{A} & \text{if}~~ {\color{cyan}A} \in \text{rolesOf}(id)\\
+    id = \projection{Exp}{A};\projection{Stm}{A} & \text{if}~~ {\color{cyan}A} \in \text{rolesOf}(TE)\\
     \projection{Exp}{A};\projection{Stm}{A} & \text{otherwise}
   \end{cases}\\
-  &&& \projection{Exp_1 ~AsgOp~ Exp_2 ~; Stm}{A}=
-  \begin{cases}
-    \projection{Exp_1}{A} ~AsgOp~ \projection{Exp_2}{A} ~; \projection{Stm}{A} \\
-    ~~~~~~~~~~~~~~~\text{if}~~ {\cyan{A}} \in \text{rolesOf}(Exp_1 \wedge Exp_2) \\
-    \projection{Stm}{A} ~~~~~\text{otherwise}
-  \end{cases}\\
+  &&& \projection{Exp_1 ~AsgOp~ Exp_2 ~; Stm}{A} = \projection{Exp_1}{A} AsgOp~ \projection{Exp_2}{A} ~; \projection{Stm}{A} \\
   &&&\projection{\gray{if}~Exp:Stm_1~;\gray{else}:Stm_2 ~;Stm}{A}=\\
   &&&
   \begin{cases}
-    \gray{if}~\projection{Exp}{A} : \projection{Stm_1}{A} ~; \gray{else}:\projection{Stm_2}{A} ~;\projection{Stm}{A} & \text{if}~~ \text{typesOf}(Exp) = \texttt{boolean}\gray{@}\cyan{A}\\
-    \projection{Exp}{A} ~; \nl{\projection{Stm_1}{A}} {\color{red}\sqcup} \nl{\projection{Stm_2}{A}} ~;\projection{Stm}{A} & \text{otherwise}
+    \gray{if}~\projection{Exp}{A} : \projection{Stm_1}{A} ~; \gray{else}:\projection{Stm_2}{A} ~;\projection{Stm}{A} & \text{if}~~ \text{rolesOf}(Exp) = \cyan{A}\\
+    \projection{Exp}{A} ~; \nl{\projection{Stm_1}{A}} \mg \nl{\projection{Stm_2}{A}} ~;\projection{Stm}{A} & \text{otherwise}
   \end{cases}\\
-  &&&\projection{\gray{try}:Stm ~~ \gray{except}:~Exp~;Stm}{A} =\\
+  &&&\projection{\gray{try}:Stm ~;~ \gray{except}~Exp~:Stm ~;Stm}{A} =\\
   &&&
   \begin{cases}
-    \gray{try}:\projection{Stm}{A}~~\gray{except}:~ \projection{Exp}{A}~;\projection{Stm}{A} & \text{if}~~ {\cyan{A}} \in \text{rolesOf}(Exp)\\
-    \gray{try}:\projection{Stm}{A}~~;\projection{Stm}{A} & \text{otherwise}
+    \gray{try}:\projection{Stm}{A}~;~\overline{\gray{except}~ \projection{Exp}{A} : \projection{Stm}{A}}~;\projection{Stm}{A} & \text{if}~~ {\cyan{A}} \in \text{rolesOf}(Exp)\\
+    %\gray{try}:\projection{Stm}{A}~~;\projection{Stm}{A} & \text{otherwise}
   \end{cases}\\
-  &&&\projection{\gray{raise} ~~Exp}{A} = 
-  \begin{cases}
-    \gray{raise} ~~\projection{Exp}{A} & \text{if}~~{\cyan{A}} \in \text{rolesOf}(Exp)\\
-    absent & \text{otherwise}
-  \end{cases}
+  %&&&\projection{\gray{raise} ~~Exp}{A} = 
+  %\begin{cases}
+  %  \gray{raise} ~~\projection{Exp}{A} & \text{if}~~{\cyan{A}} \in \text{rolesOf}(Exp)\\
+  %  absent & \text{otherwise}
+  %\end{cases}
 \end{alignat*}
 
 
+{\bf Merging}
 
+\begin{align*}
+  % Statement
+  & \text{Statement}\\
+  & \gray{return}~Exp \mg \gray{return}~Exp' = \gray{return}~Exp \mg Exp'\\
+  & (Exp_1 ~AsgOp~ Exp_2 ; Stm) \mg (Exp'_1 ~AsgOp~ Exp'_2 ; Stm')\\
+  & ~~~~~~~ = (Exp_1 \mg Exp'_1) ~AsgOp~ (Exp_2 \mg Exp'_2) ; (Stm \mg Stm')\\
+  & (Exp ; Stm) \mg (Exp' ; Stm') = (Exp \mg Exp') ; (Stm \mg Stm')\\
+  & (\gray{if}~Exp:Stm_1~;\gray{else}:Stm_2 ~;Stm) \mg (\gray{if}~Exp':Stm'_1~;\gray{else}:Stm'_2 ~;Stm')\\
+  & ~~~~~~~ = \gray{if}~(Exp \mg Exp') : (Stm_1 \mg Stm'_1) ~; \gray{else} : (Stm_2 \mg Stm'_2) ~; (Stm \mg Stm')\\
+  & \gray{match}~Exp: ~~~~~~~~~~~~~~~~~~~~\gray{match}~Exp': ~~~~~~~~~~~~~~~~~~~~\gray{match}~Exp \mg Exp':\\
+  & ~~~\gray{case}~id_a : Stm'_a; ~~~~~~~~~~~~~~~~\gray{case}~id_a : Stm''_a; ~~~~~~~~~~~~~~~~\gray{case}~id_a : Stm'_a \mg Stm''_a;\\
+  & ~~~\cdots ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\cdots ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\cdots\\
+  & ~~~\gray{case}~id_x : Stm'_x; ~~~~~~\mg~~~~~~\gray{case}~id_x : Stm''_x; ~~~~~~=~~~~~~\gray{case}~id_x : Stm'_x \mg Stm''_x;\\
+  %& ~~\text{------------------------}~~~~~~~~~~~~~~\text{------------------------}~~~~~~~~~~~~~~\text{------------------------}\\
+  & ~~~\gray{case}~id_y : Stm'_y; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\gray{case}~id_y : Stm'_y; \\
+  & ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\gray{case}~id_z : Stm'_z;~~~~~~~~~~~~~~~~\gray{case}~id_z : Stm'_z;\\
+  & ~~~\gray{case}~~\_\_ ~: Stm'_{ex}; ~~~~~~~~~~~~~~~\gray{case}~~\_\_ ~: Stm''_{ex}; ~~~~~~~~~~~~~~~\gray{case}~~\_\_ ~:Stm'_{ex} \mg Stm''_{ex};\\
+  & Stm ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Stm' ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Stm \mg Stm'\\
+  & try except\\
+  % Expression
+  & \text{Expression}\\
+  & f(\overline{Exp}) \mg f(\overline{Exp'}) = f(\overline{Exp \mg Exp'})\\
+  & Exp.f(\overline{Exp}) \mg Exp'.f(\overline{Exp'}) = (Exp \mg Exp').f(\overline{Exp \mg Exp'})
+\end{align*}
+
+{\bf Normaliser}
+\begin{align*}
+  & \text{Statements}\\
+  & \nl{\gray{pass}} = \gray{pass}\\
+  & \nl{\gray{return}~Exp} = \gray{return} ~ \nl{Exp}\\
+  & {\scriptsize{\text{\color{Purple}NOOP}}}(Exp) = 
+  \begin{cases}
+    [blank] & \text{if}~~ Exp \in \{\texttt{Unit.id, None}\}\\
+    Exp & \text{otherwise}
+  \end{cases}\\
+  & \nl{Exp_1 ~AsgOp~ Exp_2 ; Stm} = 
+  \begin{cases}
+    \nl{Exp_1} ; \nl{Stm} & \text{if}~~ {\scriptsize{\text{\color{Purple}NOOP}}}(\nl{Exp_2}) = [blank]\\
+    \nl{Exp_2} ; \nl{Stm} & \text{if}~~ {\scriptsize{\text{\color{Purple}NOOP}}}(\nl{Exp_1}) = [blank]\\
+    \nl{Stm} & \text{if}~~ {\scriptsize{\text{\color{Purple}NOOP}}}(\nl{Exp_1},\nl{Exp_2}) = [blank]\\
+    \nl{Exp_1} AsgOp \nl{Exp_2} ; \nl{Stm} & \text{otherwise}
+  \end{cases}\\
+  & \nl{Exp;Stm} =
+  \begin{cases}
+    \nl{Stm} & \text{if}~~ {\scriptsize{\text{\color{Purple}NOOP}}}(\nl{Exp}) = [blank]\\
+    \nl{Exp} ; \nl{Stm} & \text{otherwise}
+  \end{cases}\\
+  & \nl{\gray{if}~Exp:Stm_1~;~\gray{else}:Stm_2 ~;Stm} = \gray{if}~\nl{Exp}:\nl{Stm_1}~;~\gray{else}:\nl{Stm_2}~;\nl{Stm}\\
+  & \nl{\gray{match}~Exp: \overline{\gray{case}~id:Stm';} ~\gray{case}~\_\_:Stm''; Stm} = \gray{match} \nl{Exp}: \overline{\gray{case}~id: \nl{Stm'}};~ \gray{else}: \nl{Stm''} ; \nl{Stm}
+\end{align*}
 
 \end{document}
