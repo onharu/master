@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.141592653-p3.9.0-210218-2.6 (utf8.euc) (TeX Live 2021) (preloaded format=platex 2021.7.16)  12 JUL 2023 16:46
+This is e-pTeX, Version 3.141592653-p3.9.0-210218-2.6 (utf8.euc) (TeX Live 2021) (preloaded format=platex 2021.7.16)  19 JUL 2023 13:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -778,152 +778,126 @@ Package: mathbbol 1995/01/01
 (/usr/local/texlive/2021/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip17
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
-)
-(/usr/local/texlive/2021/texmf-dist/tex/latex/listings/listings.sty
-\lst@mode=\count310
-\lst@gtempboxa=\box116
-\lst@token=\toks43
-\lst@length=\count311
-\lst@currlwidth=\dimen298
-\lst@column=\count312
-\lst@pos=\count313
-\lst@lostspace=\dimen299
-\lst@width=\dimen300
-\lst@newlines=\count314
-\lst@lineno=\count315
-\lst@maxwidth=\dimen301
-
-(/usr/local/texlive/2021/texmf-dist/tex/latex/listings/lstmisc.sty
-File: lstmisc.sty 2020/03/24 1.8d (Carsten Heinz)
-\c@lstnumber=\count316
-\lst@skipnumbers=\count317
-\lst@framebox=\box117
-)
-(/usr/local/texlive/2021/texmf-dist/tex/latex/listings/listings.cfg
-File: listings.cfg 2020/03/24 1.8d listings configuration
-))
-Package: listings 2020/03/24 1.8d (Carsten Heinz)
-
-No file thesis2.aux.
+) (./thesis2.aux)
 \openout1 = `thesis2.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 103.
-LaTeX Font Info:    ... okay on input line 103.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 103.
-LaTeX Font Info:    ... okay on input line 103.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 103.
-LaTeX Font Info:    ... okay on input line 103.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 103.
-LaTeX Font Info:    ... okay on input line 103.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 103.
-LaTeX Font Info:    ... okay on input line 103.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 103.
-LaTeX Font Info:    ... okay on input line 103.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 103.
-LaTeX Font Info:    ... okay on input line 103.
-LaTeX Font Info:    Checking defaults for JY1/mc/m/n on input line 103.
-LaTeX Font Info:    ... okay on input line 103.
-LaTeX Font Info:    Checking defaults for JT1/mc/m/n on input line 103.
-LaTeX Font Info:    ... okay on input line 103.
-\c@lstlisting=\count318
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 85.
+LaTeX Font Info:    ... okay on input line 85.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 85.
+LaTeX Font Info:    ... okay on input line 85.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 85.
+LaTeX Font Info:    ... okay on input line 85.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 85.
+LaTeX Font Info:    ... okay on input line 85.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 85.
+LaTeX Font Info:    ... okay on input line 85.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 85.
+LaTeX Font Info:    ... okay on input line 85.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 85.
+LaTeX Font Info:    ... okay on input line 85.
+LaTeX Font Info:    Checking defaults for JY1/mc/m/n on input line 85.
+LaTeX Font Info:    ... okay on input line 85.
+LaTeX Font Info:    Checking defaults for JT1/mc/m/n on input line 85.
+LaTeX Font Info:    ... okay on input line 85.
 LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <10.95> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 104.
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 86.
 LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <10.95> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 104.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 105
-.
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 86.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 87.
+
+
 (/usr/local/texlive/2021/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 105
-.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 87.
+
 
 (/usr/local/texlive/2021/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Trying to load font information for U+stmry on input line 1
-05.
+LaTeX Font Info:    Trying to load font information for U+stmry on input line 8
+7.
 
 (/usr/local/texlive/2021/texmf-dist/tex/latex/stmaryrd/Ustmry.fd)
-LaTeX Font Info:    Trying to load font information for U+bbold on input line 1
-05.
+LaTeX Font Info:    Trying to load font information for U+bbold on input line 8
+7.
 
 (/usr/local/texlive/2021/texmf-dist/tex/latex/bbold/Ubbold.fd)
-Overfull \hbox (128.11967pt too wide) detected at line 114
+Overfull \hbox (128.11967pt too wide) detected at line 96
 []
  []
 
 
-Overfull \hbox (109.99016pt too wide) detected at line 171
+Overfull \hbox (109.99016pt too wide) detected at line 153
 []
  []
 
 
-Overfull \hbox (107.46927pt too wide) detected at line 206
+Overfull \hbox (107.46927pt too wide) detected at line 188
 []
  []
 
 [1
 
 ]
-Overfull \hbox (74.21733pt too wide) detected at line 234
+Overfull \hbox (74.21733pt too wide) detected at line 216
 []
  []
 
 [2]
 
-LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 260.
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 242.
 
 
 
-LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 260.
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 242.
 
 
 
-LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 260.
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 242.
 
 
 
-LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 260.
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 242.
 
 
 
-LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 260.
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 242.
 
 
 
-LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 260.
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 242.
 
 
 
-LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 260.
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 242.
 
 
 
-LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 260.
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 242.
 
 
 
-LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 260.
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 242.
 
 
 
-LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 260.
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 242.
 
 
 
-Overfull \hbox (164.98488pt too wide) detected at line 260
+Overfull \hbox (164.98488pt too wide) detected at line 242
 []
  []
 
 [3] [4] (./thesis2.aux) ) 
 Here is how much of TeX's memory you used:
- 19270 strings out of 479005
- 389280 string characters out of 5862675
- 803978 words of memory out of 5000000
- 37022 multiletter control sequences out of 15000+600000
+ 17918 strings out of 479005
+ 369889 string characters out of 5862675
+ 785000 words of memory out of 5000000
+ 35680 multiletter control sequences out of 15000+600000
  419242 words of font info for 94 fonts, out of 8000000 for 9000
  929 hyphenation exceptions out of 8191
- 102i,20n,108p,449b,326s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 102i,20n,108p,449b,324s stack positions out of 5000i,500n,10000p,200000b,80000s
 
 Output written on thesis2.dvi (4 pages, 34512 bytes).
