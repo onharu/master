@@ -1,0 +1,15 @@
+\begin{thebibliography}{1}
+
+\bibitem{choral}
+choral.
+\newblock \url{https://www.choral-lang.org/index.html}.
+
+\bibitem{mypy}
+mypy.
+\newblock \url{https://mypy.readthedocs.io/en/stable}.
+
+\bibitem{choreography}
+Saverio Giallorenzo, Fabrizio Montesi, and Marco Peressotti.
+\newblock Object-oriented choreographic programming, 2022.
+
+\end{thebibliography}

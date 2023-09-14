@@ -74,8 +74,10 @@
 %   breaklinks=true}
 
 \usepackage{url}
+\usepackage[margin=15mm]{geometry} %ページの余白
+%\setlength{\oddsidemargin}{0mm}
 
-
+%コマンド
 \newcommand{\projection}[2]{{\color{cyan}\llparenthesis}#1{\color{cyan}\rrparenthesis^#2}}
 \newcommand{\gray}[1]{\textbf{\textsf{\color{Gray}#1}}}
 \newcommand{\cyan}[1]{\color{cyan}#1}
@@ -157,9 +159,8 @@
   &&&\projection{Exp;Stm}{A} =
   \begin{cases}
     \gray{match} ~\projection{Exp}{A}: & \text{if}~~Exp = Exp.f(\overline{Exp}):\texttt{Enum}\gray{@}{\cyan{A}}~~~\text{and}\\
-    ~~~~~\gray{case} ~id: \projection{Stm'}{A}; &~~~~ \gray{@}\texttt{SelectionMethod} \in \texttt{annotationOf}(f)\\%&~~~~ {\cyan{A}} \in \text{rolesOf}(Exp.f(\overline{Exp})) ~~\text{and}\\
-    ~~~~~\gray{case} ~\_\_: \projection{Stm''}{A}; \\
-    \projection{Stm}{A}\\
+    ~~~~~\gray{case} ~id: \projection{Stm}{A}; &~~~~ \text{Name}(f) = \texttt{Selection}\\%&~~~~ {\cyan{A}} \in \text{rolesOf}(Exp.f(\overline{Exp})) ~~\text{and}\\
+    ~~~~~\gray{case} ~\_\_: \text{assert False}; \\
     \projection{Exp}{A};\projection{Stm}{A} & \text{otherwise}\\
   \end{cases}\\
   &&& \projection{id:TE = Exp~;Stm}{A} =

@@ -1,0 +1,50 @@
+This is pBibTeX, Version 0.99d-j0.33 (utf8.euc) (TeX Live 2021)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: mid_2023_7_25.aux
+The style file: jplain.bst
+Database file #1: reference.bib
+Warning--to sort, need author or key in choral
+Warning--to sort, need author or key in mypy
+You've used 3 entries,
+            2620 wiz_defined-function locations,
+            600 strings with 4772 characters,
+and the built_in function-call counts, 734 in all, are:
+= -- 51
+> -- 19
+< -- 0
++ -- 9
+- -- 6
+* -- 26
+:= -- 88
+add.period$ -- 6
+call.type$ -- 3
+change.case$ -- 12
+chr.to.int$ -- 0
+cite$ -- 5
+duplicate$ -- 39
+empty$ -- 88
+format.name$ -- 9
+if$ -- 172
+int.to.chr$ -- 0
+int.to.str$ -- 3
+missing$ -- 0
+newline$ -- 15
+num.names$ -- 2
+pop$ -- 47
+preamble$ -- 1
+purify$ -- 9
+quote$ -- 0
+skip$ -- 40
+stack$ -- 0
+substring$ -- 15
+swap$ -- 3
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 12
+warning$ -- 2
+while$ -- 2
+width$ -- 4
+write$ -- 24
+is.kanji.str$ -- 22
+(There were 2 warnings)

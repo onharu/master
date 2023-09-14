@@ -1,10 +1,10 @@
 # Fdb version 3
-["dvipdf"] 1689148035 "out/thesis2.dvi" "out/thesis2.pdf" "out/thesis2" 1689148035
-  "out/thesis2.dvi" 1689148035 34512 e31ed376844b19f87c9f894c1e6dc17f "latex"
+["dvipdf"] 1692775646 "out/thesis2.dvi" "out/thesis2.pdf" "out/thesis2" 1692775647
+  "out/thesis2.dvi" 1692775646 34092 79ef2e2a1a04315934e7f344ee128f05 "latex"
   (generated)
   "out/thesis2.pdf"
-["latex"] 1689148034 "/Users/onda/master/thesis2.tex" "out/thesis2.dvi" "thesis2" 1689148035
-  "/Users/onda/master/thesis2.tex" 1689148034 12565 8a59672fbf6ca56b651f5b7cf6894ce5 ""
+["latex"] 1692775645 "/Users/onda/master/thesis2.tex" "out/thesis2.dvi" "thesis2" 1692775647
+  "/Users/onda/master/thesis2.tex" 1692775645 12611 a017206622b7c309784bf2a85bedd4dc ""
   "/usr/local/texlive/2021/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/ptex-fonts/standard/goth10.tfm" 1463434352 1196 5981e79c37b2cfd27b3612a6783cd4b6 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/ptex-fonts/standard/goth6.tfm" 1463434352 1196 977af188465e721f1f65facb66282510 ""
@@ -53,6 +53,7 @@
   "/usr/local/texlive/2021/texmf-dist/tex/generic/atbegshi/atbegshi.sty" 1575674566 24708 5584a51a7101caf7e6bbf1fc27d8f7b1 ""
   "/usr/local/texlive/2021/texmf-dist/tex/generic/etexcmds/etexcmds.sty" 1576625273 7734 b98cbb34c81f667027c1e3ebdbfce34b ""
   "/usr/local/texlive/2021/texmf-dist/tex/generic/iftex/iftex.sty" 1583617216 6501 4011d89d9621e0b0901138815ba5ff29 ""
+  "/usr/local/texlive/2021/texmf-dist/tex/generic/iftex/ifvtex.sty" 1572645307 1057 525c2192b5febbd8c1f662c9468335bb ""
   "/usr/local/texlive/2021/texmf-dist/tex/generic/infwarerr/infwarerr.sty" 1575499628 8356 7bbb2c2373aa810be568c29e333da8ed ""
   "/usr/local/texlive/2021/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty" 1576878844 5412 d5a2436094cd7be85769db90f29250a6 ""
   "/usr/local/texlive/2021/texmf-dist/tex/generic/kvsetkeys/kvsetkeys.sty" 1576624944 13807 952b0226d4efca026f0e19dd266dcc22 ""
@@ -143,6 +144,7 @@
   "/usr/local/texlive/2021/texmf-dist/tex/latex/ebproof/ebproof.sty" 1611871731 19579 66dd824a6145a642268cd0179ab80274 ""
   "/usr/local/texlive/2021/texmf-dist/tex/latex/etoolbox/etoolbox.sty" 1601931149 46845 3b58f70c6e861a13d927bff09d35ecbc ""
   "/usr/local/texlive/2021/texmf-dist/tex/latex/float/float.sty" 1137110151 6749 16d2656a1984957e674b149555f1ea1d ""
+  "/usr/local/texlive/2021/texmf-dist/tex/latex/geometry/geometry.sty" 1578002852 41601 9cf6c5257b1bc7af01a58859749dd37a ""
   "/usr/local/texlive/2021/texmf-dist/tex/latex/graphics-cfg/color.cfg" 1459978653 1213 620bba36b25224fa9b7e1ccb4ecb76fd ""
   "/usr/local/texlive/2021/texmf-dist/tex/latex/graphics-cfg/graphics.cfg" 1465944070 1224 978390e9c2234eab29404bc21b268d1e ""
   "/usr/local/texlive/2021/texmf-dist/tex/latex/graphics-def/dvips.def" 1498170935 5895 4b59bd0c17e1116fd6b6e7c683dea655 ""
@@ -189,9 +191,9 @@
   "/usr/local/texlive/2021/texmf-dist/web2c/texmf.cnf" 1621028613 40042 fe981136cbb5f3715ab1b0e46e3d3892 ""
   "/usr/local/texlive/2021/texmf-var/web2c/eptex/platex.fmt" 1626447048 2756591 b5f98b6f6ecec28b627412e4fa021240 ""
   "/usr/local/texlive/2021/texmf.cnf" 1616695596 577 4c1911a7228e554c6032256d3cf5567d ""
-  "out/thesis2.aux" 1689148035 67 20057a74cded03a274648b1bcd04c3ae "latex"
-  "thesis2.tex" 1689148034 12565 8a59672fbf6ca56b651f5b7cf6894ce5 ""
+  "out/thesis2.aux" 1692775646 67 3705c6601359574168251466ef4fff2b "latex"
+  "thesis2.tex" 1692775645 12611 a017206622b7c309784bf2a85bedd4dc ""
   (generated)
-  "out/thesis2.log"
   "out/thesis2.aux"
   "out/thesis2.dvi"
+  "out/thesis2.log"

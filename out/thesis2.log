@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.141592653-p3.9.0-210218-2.6 (utf8.euc) (TeX Live 2021) (preloaded format=platex 2021.7.16)  12 JUL 2023 16:47
+This is e-pTeX, Version 3.141592653-p3.9.0-210218-2.6 (utf8.euc) (TeX Live 2021) (preloaded format=platex 2021.7.16)  23 AUG 2023 16:27
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -594,108 +594,134 @@ Package: mathbbol 1995/01/01
 ) (/usr/local/texlive/2021/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip17
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+) (/usr/local/texlive/2021/texmf-dist/tex/latex/geometry/geometry.sty
+Package: geometry 2020/01/02 v5.9 Page Geometry
+(/usr/local/texlive/2021/texmf-dist/tex/generic/iftex/ifvtex.sty
+Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
+)
+\Gm@cnth=\count310
+\Gm@cntv=\count311
+\c@Gm@tempcnt=\count312
+\Gm@bindingoffset=\dimen298
+\Gm@wd@mp=\dimen299
+\Gm@odd@mp=\dimen300
+\Gm@even@mp=\dimen301
+\Gm@layoutwidth=\dimen302
+\Gm@layoutheight=\dimen303
+\Gm@layouthoffset=\dimen304
+\Gm@layoutvoffset=\dimen305
+\Gm@dimlist=\toks43
 ) (out/thesis2.aux)
 \openout1 = `thesis2.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 85.
-LaTeX Font Info:    ... okay on input line 85.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 85.
-LaTeX Font Info:    ... okay on input line 85.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 85.
-LaTeX Font Info:    ... okay on input line 85.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 85.
-LaTeX Font Info:    ... okay on input line 85.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 85.
-LaTeX Font Info:    ... okay on input line 85.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 85.
-LaTeX Font Info:    ... okay on input line 85.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 85.
-LaTeX Font Info:    ... okay on input line 85.
-LaTeX Font Info:    Checking defaults for JY1/mc/m/n on input line 85.
-LaTeX Font Info:    ... okay on input line 85.
-LaTeX Font Info:    Checking defaults for JT1/mc/m/n on input line 85.
-LaTeX Font Info:    ... okay on input line 85.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
+LaTeX Font Info:    Checking defaults for JY1/mc/m/n on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
+LaTeX Font Info:    Checking defaults for JT1/mc/m/n on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
+*geometry* driver: auto-detecting
+*geometry* detected driver: dvips
+*geometry* verbose mode - [ preamble ] result:
+* driver: dvips
+* paper: <default>
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(42.67912pt, 512.14963pt, 42.67912pt)
+* v-part:(T,H,B)=(42.67912pt, 759.6886pt, 42.67912pt)
+* \paperwidth=597.50787pt
+* \paperheight=845.04684pt
+* \textwidth=512.14963pt
+* \textheight=759.6886pt
+* \oddsidemargin=-29.59087pt
+* \evensidemargin=-29.59087pt
+* \topmargin=-66.59087pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=8.51457pt
+* \footskip=30.0pt
+* \marginparwidth=98.0pt
+* \marginparsep=10.0pt
+* \columnsep=10.0pt
+* \skip\footins=10.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
 LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <10.95> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 86.
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 88.
 LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <10.95> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 86.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 87.
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 88.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 89.
 (/usr/local/texlive/2021/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 87.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 89.
 (/usr/local/texlive/2021/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Trying to load font information for U+stmry on input line 87.
+LaTeX Font Info:    Trying to load font information for U+stmry on input line 89.
 (/usr/local/texlive/2021/texmf-dist/tex/latex/stmaryrd/Ustmry.fd)
-LaTeX Font Info:    Trying to load font information for U+bbold on input line 87.
-(/usr/local/texlive/2021/texmf-dist/tex/latex/bbold/Ubbold.fd)
-Overfull \hbox (128.11967pt too wide) detected at line 96
-[]
- []
-
-
-Overfull \hbox (109.99016pt too wide) detected at line 153
-[]
- []
-
-
-Overfull \hbox (107.46927pt too wide) detected at line 188
-[]
- []
-
-[1
+LaTeX Font Info:    Trying to load font information for U+bbold on input line 89.
+(/usr/local/texlive/2021/texmf-dist/tex/latex/bbold/Ubbold.fd) [1
 
 ]
-Overfull \hbox (74.21733pt too wide) detected at line 216
-[]
- []
 
-[2]
-
-LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 242.
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 243.
 
 
-LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 242.
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 243.
 
 
-LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 242.
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 243.
 
 
-LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 242.
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 243.
 
 
-LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 242.
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 243.
 
 
-LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 242.
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 243.
 
 
-LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 242.
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 243.
 
 
-LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 242.
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 243.
 
 
-LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 242.
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 243.
 
 
-LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 242.
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 243.
 
-
-Overfull \hbox (164.98488pt too wide) detected at line 242
-[]
- []
-
-[3] [4] (out/thesis2.aux) ) 
+[2] [3] (out/thesis2.aux) ) 
 Here is how much of TeX's memory you used:
- 17920 strings out of 479005
- 369968 string characters out of 5862675
- 785000 words of memory out of 5000000
- 35680 multiletter control sequences out of 15000+600000
+ 18386 strings out of 479005
+ 376886 string characters out of 5862675
+ 796409 words of memory out of 5000000
+ 36141 multiletter control sequences out of 15000+600000
  419242 words of font info for 94 fonts, out of 8000000 for 9000
  929 hyphenation exceptions out of 8191
  102i,20n,108p,468b,324s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on out/thesis2.dvi (4 pages, 34512 bytes).
+Output written on out/thesis2.dvi (3 pages, 34092 bytes).
