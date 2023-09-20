@@ -159,7 +159,7 @@
   &&&\projection{Exp;Stm}{A} =
   \begin{cases}
     \gray{match} ~\projection{Exp}{A}: & \text{if}~~Exp = Exp.f(\overline{Exp}):\texttt{Enum}\gray{@}{\cyan{A}}~~~\text{and}\\
-    ~~~~~\gray{case} ~id: \projection{Stm}{A}; &~~~~ \text{Name}(f) = \texttt{Selection}\\%&~~~~ {\cyan{A}} \in \text{rolesOf}(Exp.f(\overline{Exp})) ~~\text{and}\\
+    ~~~~~\gray{case} ~id: \projection{Stm}{A}; &~~~~ \text{Name}(f) = \texttt{Select}\\%&~~~~ {\cyan{A}} \in \text{rolesOf}(Exp.f(\overline{Exp})) ~~\text{and}\\
     ~~~~~\gray{case} ~\_\_: \text{assert False}; \\
     \projection{Exp}{A};\projection{Stm}{A} & \text{otherwise}\\
   \end{cases}\\
